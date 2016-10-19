@@ -18,11 +18,18 @@ switch($action){
 			include("vues/v_connexion.php");
 		}
 		else{
+
+                    // Si le profil est celui d'un comptable, le sommaire sera différent
 			$id = $visiteur['id'];
 			$nom =  $visiteur['nom'];
 			$prenom = $visiteur['prenom'];
+                        $profil = $visiteur['profil'];
 			connecter($id,$nom,$prenom);
-			include("vues/v_sommaire.php");
+                        if($profil == '1'){
+                            include("vues/v_sommaireComptable.php");
+                        }else{
+                            include("vues/v_sommaire.php");
+                        }
 		}
 		break;
 	}

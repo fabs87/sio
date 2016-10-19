@@ -24,6 +24,7 @@ function connecter($id,$nom,$prenom){
 	$_SESSION['idVisiteur']= $id; 
 	$_SESSION['nom']= $nom;
 	$_SESSION['prenom']= $prenom;
+        
 }
 /**
  * Détruit la session active
@@ -38,8 +39,8 @@ function deconnecter(){
  * @return la date au format anglais aaaa-mm-jj
 */
 function dateFrancaisVersAnglais($maDate){
-	@list($jour,$mois,$annee) = explode('/',$maDate);
-	return date('Y-m-d',mktime(0,0,0,$mois,$jour,$annee));
+    @list($jour,$mois,$annee) = explode('/',$maDate);
+    return date('Y-m-d',mktime(0,0,0,$mois,$jour,$annee));
 }
 /**
  * Transforme une date au format format anglais aaaa-mm-jj vers le format français jj/mm/aaaa 
@@ -48,24 +49,38 @@ function dateFrancaisVersAnglais($maDate){
  * @return la date au format format français jj/mm/aaaa
 */
 function dateAnglaisVersFrancais($maDate){
-   @list($annee,$mois,$jour)=explode('-',$maDate);
+   @list($annee,$mois,$jour) = explode('-',$maDate);
    $date="$jour"."/".$mois."/".$annee;
    return $date;
 }
 /**
  * retourne le mois au format aaaamm selon le jour dans le mois
- 
+ *
  * @param $date au format  jj/mm/aaaa
  * @return le mois au format aaaamm
 */
 function getMois($date){
-		@list($jour,$mois,$annee) = explode('/',$date);
-		if(strlen($mois) == 1){
-			$mois = "0".$mois;
-		}
-		return $annee.$mois;
+    @list($jour,$mois,$annee) = explode('/',$date);
+    if(strlen($mois) == 1){
+	$mois = "0".$mois;
+    }
+    return $annee.$mois;
 }
 
+/**
+ * retourne le mois précédent de la date actuelle
+ * 
+ * @param $date au format aaaamm
+ * @return 
+ */
+function getMoisPrecedent($date){
+        @list($jour,$mois,$annee) = explode('/',$date);
+        $mois -= 1;
+    if(strlen($mois) == 1){
+	$mois = "0".$mois;
+    }
+    return $annee.$mois;
+}
 /* gestion des erreurs*/
 /**
  * Indique si une valeur est un entier positif ou nul
@@ -199,4 +214,5 @@ function nbErreurs(){
 	   return count($_REQUEST['erreurs']);
 	}
 }
+
 ?>

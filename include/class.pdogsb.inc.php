@@ -47,21 +47,19 @@ class PdoGsb{
 		return PdoGsb::$monPdoGsb;  
 	}
 /**
- * Retourne les informations d'un visiteur
- 
+ * Retourne les informations d'un visiteur et surtout son profil afin de
+ * différencier le visiteur du comptable 
  * @param $login 
  * @param $mdp
- * @return l'id, le nom et le prénom sous la forme d'un tableau associatif 
+ * @return l'id, le nom et le prénom et le profil sous la forme d'un tableau associatif 
 */
 	public function getInfosVisiteur($login, $mdp){
-		$req = "select visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom from visiteur 
+		$req = "select visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom, visiteur.profil as profil from visiteur 
 		where visiteur.login='$login' and visiteur.mdp='$mdp'";
 		$rs = PdoGsb::$monPdo->query($req);
 		$ligne = $rs->fetch();
-                var_dump($ligne);
-		return $ligne;
+                return $ligne;
 	}
-
 /**
  * Retourne sous forme d'un tableau associatif toutes les lignes de frais hors forfait
  * concernées par les deux arguments
@@ -147,7 +145,6 @@ class PdoGsb{
 			and lignefraisforfait.idfraisforfait = '$unIdFrais'";
 			PdoGsb::$monPdo->exec($req);
 		}
-		
 	}
 /**
  * met à jour le nombre de justificatifs de la table ficheFrais
@@ -192,8 +189,22 @@ class PdoGsb{
 		$laLigne = $res->fetch();
 		$dernierMois = $laLigne['dernierMois'];
 		return $dernierMois;
-	}
-	
+	}	
+/**
+ * Modifie l'état de la fiche en CL si celle-ci n'y est pas
+ * Cette action se déclenche lors de la validation de la fiche par un comptable
+ * 
+ * @param type $idVisiteur
+ * @param type $mois
+ */
+        
+        public function validationMois($idVisiteur, $mois){
+            $moisAvalider = $this->getLesInfosFicheFrais($idVisiteur, $mois);
+            if($moisAvalider['idEtat']=='CR'){
+                    $this->majEtatFicheFrais($idVisiteur, $mois,'CL');
+		}
+            
+        }
 /**
  * Crée une nouvelle fiche de frais et les lignes de frais au forfait pour un visiteur et un mois donnés
  
@@ -206,8 +217,7 @@ class PdoGsb{
 		$dernierMois = $this->dernierMoisSaisi($idVisiteur);
 		$laDerniereFiche = $this->getLesInfosFicheFrais($idVisiteur,$dernierMois);
 		if($laDerniereFiche['idEtat']=='CR'){
-				$this->majEtatFicheFrais($idVisiteur, $dernierMois,'CL');
-				
+                    $this->majEtatFicheFrais($idVisiteur, $dernierMois,'CL');
 		}
 		$req = "insert into fichefrais(idvisiteur,mois,nbJustificatifs,montantValide,dateModif,idEtat) 
 		values('$idVisiteur','$mois',0,0,now(),'CR')";
@@ -227,15 +237,29 @@ class PdoGsb{
  * @param $idVisiteur 
  * @param $mois sous la forme aaaamm
  * @param $libelle : le libelle du frais
- * @param $date : la date du frais au format français jj//mm/aaaa
+ * @param $date : la date du frais au format français jj/mm/aaaa
  * @param $montant : le montant
 */
 	public function creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,$date,$montant){
 		$dateFr = dateFrancaisVersAnglais($date);
+                var_dump($dateFr);
 		$req = "insert into lignefraishorsforfait 
 		values('','$idVisiteur','$mois','$libelle','$dateFr','$montant')";
 		PdoGsb::$monPdo->exec($req);
 	}
+/**
+ * Récupération d'un frais hors forfait afin de le mémoriser avant le report
+ * 
+ * @param type $idfrais
+ */
+        public function getUnFraisHorsForfait($idfrais){
+                $req ="select lignefraishorsforfait.idVisiteur as idvisiteur, lignefraishorsforfait.mois "
+                        . "as mois, lignefraishorsforfait.libelle as libelle, lignefraishorsforfait.montant"
+                        . " as montant from lignefraishorsforfait where lignefraishorsforfait.id = $idfrais";
+                $res = PdoGsb::$monPdo->query($req);
+		$leFraisHorsForfait = $res->fetch();
+                return $leFraisHorsForfait;
+        }
 /**
  * Supprime le frais hors forfait dont l'id est passé en argument
  
@@ -246,6 +270,24 @@ class PdoGsb{
 		PdoGsb::$monPdo->exec($req);
 	}
 /**
+ * Ajout de la mentien REFUSE dans le libellé d'un frais non valide
+ * Vérification si le mot REFUSE est déja présent, cela signifie que
+ * le REFUS a déja été fait donc aucun update à faire.
+ * 
+ * @param type $idFrais
+ */       
+        public function majLibelleRefuse($idFrais){
+                $select = "select lignefraishorsforfait.libelle as libelle from lignefraishorsforfait where lignefraishorsforfait.id =$idFrais";
+                $res = PdoGsb::$monPdo->query($select);
+                $resultat = $res->fetch();
+                $libelle = $resultat['libelle'];
+                if (!strstr($libelle,"REFUSE")){
+                    $req = "update lignefraishorsforfait set lignefraishorsforfait.libelle = 'REFUSE $libelle' where lignefraishorsforfait.id=$idFrais";
+                    PdoGsb::$monPdo->exec($req);
+                }
+        }
+/**
+ *     
  * Retourne les mois pour lesquel un visiteur a une fiche de frais
  
  * @param $idVisiteur 
@@ -298,5 +340,16 @@ class PdoGsb{
 		where fichefrais.idvisiteur ='$idVisiteur' and fichefrais.mois = '$mois'";
 		PdoGsb::$monPdo->exec($req);
 	}
+        
+/**
+* Cherche dans la base la liste de tous les visiteurs qui ne sont pas 
+* comptable ( donc valeur du profil à 0) et le retourne sur un tableau
+*/
+        public function getListeVisiteur(){
+                $req = "select visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom from visiteur where visiteur.profil = 0";
+                $res = PdoGsb::$monPdo->query($req);
+                $lesVisiteurs = $res->fetchAll();
+                return $lesVisiteurs;
+        }
 }
 ?>
