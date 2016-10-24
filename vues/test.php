@@ -23,7 +23,7 @@ var_dump($var);
 
 // Affiche : July 1, 2000 est un Saturday
 echo "July 1, 2000 est un " . date("l", mktime(0, 0, 0, 7, 1, 2000));
-*/
+
 $mois = getMois(date("d/m/Y"));
 var_dump($mois);
 $numAnnee =substr( $mois,0,4);
@@ -36,3 +36,16 @@ var_dump($numMois);
 $visiteur ="a17";
 $dernierMois = $pdo->dernierMoisSaisi($visiteur);
 var_dump($dernierMois);
+
+
+$mois = "201512";
+$moisSuivant = getMoisSuivant($mois);
+var_dump($moisSuivant);
+*/
+
+$visiteur = "a17";
+$moisSuivant = "201610";
+$leLibelleConcerne = "location salle";
+$dateActuelle = "23/10/2016";
+$leMontantConcerne = 500;
+$pdo->creeNouveauFraisHorsForfait($visiteur,$moisSuivant,$leLibelleConcerne,$dateActuelle,$leMontantConcerne);

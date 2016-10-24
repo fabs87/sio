@@ -22,6 +22,8 @@
                 }
                 ?>                    
             </fieldset>
+        <input type="hidden" id="TxtAnnee" name="numAnnee" value="<?php echo $numAnnee ?>">
+        <input type="hidden" id="TxtMois" name="numMois" value="<?php echo $numMois ?>">
         <input type="hidden" id="TxtVisiteur" name="leVisiteur" value="<?php echo $visiteur ?>">
         
         <div class="piedForm">

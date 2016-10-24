@@ -242,7 +242,6 @@ class PdoGsb{
 */
 	public function creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,$date,$montant){
 		$dateFr = dateFrancaisVersAnglais($date);
-                var_dump($dateFr);
 		$req = "insert into lignefraishorsforfait 
 		values('','$idVisiteur','$mois','$libelle','$dateFr','$montant')";
 		PdoGsb::$monPdo->exec($req);
@@ -287,6 +286,21 @@ class PdoGsb{
                 }
         }
 /**
+ * Requete pemettant d'aller chercher les douze derniers mois 
+ * se trouvant dans la base.
+ * 
+ * @return lesMois
+ * 
+ *  
+ */
+        public function getListeMois(){
+            $req = "select distinct fichefrais.mois as mois from fichefrais order by fichefrais.mois desc limit 12";
+            $res = PdoGsb::$monPdo->query($req);
+            $lesMois = $res->fetchAll();
+            return $lesMois;
+        }
+        
+/**
  *     
  * Retourne les mois pour lesquel un visiteur a une fiche de frais
  
@@ -304,8 +318,8 @@ class PdoGsb{
 			$numAnnee =substr( $mois,0,4);
 			$numMois =substr( $mois,4,2);
 			$lesMois["$mois"]=array(
-		     "mois"=>"$mois",
-		    "numAnnee"  => "$numAnnee",
+                        "mois"=>"$mois",
+                        "numAnnee"  => "$numAnnee",
 			"numMois"  => "$numMois"
              );
 			$laLigne = $res->fetch(); 		
@@ -343,7 +357,7 @@ class PdoGsb{
         
 /**
 * Cherche dans la base la liste de tous les visiteurs qui ne sont pas 
-* comptable ( donc valeur du profil à 0) et le retourne sur un tableau
+* comptable ( donc valeur du profil à 0) et le retourne dans un tableau
 */
         public function getListeVisiteur(){
                 $req = "select visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom from visiteur where visiteur.profil = 0";

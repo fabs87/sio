@@ -66,7 +66,26 @@ function getMois($date){
     }
     return $annee.$mois;
 }
-
+/**
+ * Retourne le mois suivant sur la chaine passée en paramètre sous la forme aaaamm
+ * 
+ * @param String $mois
+ * @return String $moisSuivant
+ */
+function getMoisSuivant($mois){
+    $annee = substr($mois, 0, 4);
+    $moisConcerne = substr($mois, 4, 2);
+    if ($moisConcerne == 12){
+        $moisSuivant = 1;
+        $annee += 1;
+    }else{
+        $moisSuivant = $moisConcerne + 1;
+    }
+    if(strlen($moisSuivant) == 1){
+	$moisSuivant = "0".$moisSuivant;
+    }
+    return $annee.$moisSuivant;
+}
 /**
  * retourne le mois précédent de la date actuelle
  * 
@@ -75,6 +94,10 @@ function getMois($date){
  */
 function getMoisPrecedent($date){
         @list($jour,$mois,$annee) = explode('/',$date);
+        if ($mois == 1){
+            $mois = 12;
+            $annee -=1;
+        }
         $mois -= 1;
     if(strlen($mois) == 1){
 	$mois = "0".$mois;
