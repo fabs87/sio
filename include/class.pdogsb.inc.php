@@ -365,5 +365,17 @@ class PdoGsb{
                 $lesVisiteurs = $res->fetchAll();
                 return $lesVisiteurs;
         }
+
+/**
+ * Cherche dans la base les fiches ayant l'état à Valider et les retourne dans un tableau
+ * 
+ * @return $lesFiches
+ */        
+        public function getFicheAValider(){
+                $req = "select visiteur.nom as nom, visiteur.prenom as prenom, fichefrais.idvisiteur as idvisiteur, fichefrais.mois as mois from visiteur join fichefrais on visiteur.id = fichefrais.idvisiteur where fichefrais.idetat = 'VA'";
+                $res = PdoGsb::$monPdo->query($req);
+                $lesFiches = $res->fetchAll();
+                return $lesFiches;
+        }
 }
 ?>
