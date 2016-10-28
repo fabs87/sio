@@ -34,6 +34,8 @@ switch ($action) {
             $lesFrais = $_REQUEST['lesFrais'];
             $visiteur = $_SESSION['leVisiteur'];
             $leMois = $_SESSION['leMois'];
+            $numMois = $_SESSION['numMois'];
+            $numAnnee = $_SESSION['numAnnee'];
             if (lesQteFraisValides($lesFrais)) {
                 $pdo->majFraisForfait($visiteur, $leMois, $lesFrais);
                 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($visiteur, $leMois);
@@ -68,18 +70,13 @@ switch ($action) {
             $moisSuivant = getMoisSuivant($leMoisSelectionne);
             $numMois = $_SESSION['numMois'];
             $numAnnee = $_SESSION['numAnnee'];
-            var_dump($moisSuivant);
             $leFrais = $pdo->getUnFraisHorsForfait($idFrais);
             $leLibelleConcerne = $leFrais['libelle'];
             $leMontantConcerne = $leFrais['montant'];
             $dateActuelle = date("d/m/Y");
-            var_dump($dateActuelle);
-            var_dump($leLibelleConcerne);
-            var_dump($leMontantConcerne);
-            var_dump($visiteur);
             if (!$pdo ->estPremierFraisMois($visiteur, $moisSuivant)){
                 $pdo->creeNouveauFraisHorsForfait($visiteur,$moisSuivant,$leLibelleConcerne,$dateActuelle,$leMontantConcerne);
-                //$pdo->supprimerFraisHorsForfait($idFrais);
+                $pdo->supprimerFraisHorsForfait($idFrais);
                 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($visiteur, $leMoisSelectionne);
                 $lesFraisForfait = $pdo->getLesFraisForfait($visiteur, $leMoisSelectionne);
                 include("vues/v_listeFraisForfaitAValider.php");
@@ -88,7 +85,7 @@ switch ($action) {
             }else{
                 $pdo->creeNouvellesLignesFrais($visiteur,$moisSuivant);
                 $pdo->creeNouveauFraisHorsForfait($visiteur,$moisSuivant,$leLibelleConcerne,$dateActuelle,$leMontantConcerne);
-                //$pdo->supprimerFraisHorsForfait($idFrais);
+                $pdo->supprimerFraisHorsForfait($idFrais);
                 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($visiteur, $leMoisSelectionne);
                 $lesFraisForfait = $pdo->getLesFraisForfait($visiteur, $leMoisSelectionne);
                 include("vues/v_listeFraisForfaitAValider.php");
@@ -100,7 +97,10 @@ switch ($action) {
     case 'validationFrais':{
             $visiteur = $_SESSION['leVisiteur'];
             $mois = $_REQUEST['mois'];
-            $pdo->validationMois($visiteur,$mois);
-    }        
+            $etat = "CL";
+            $pdo->validationMois($visiteur,$mois, $etat);
+            break;
+    }   
+
 }
 ?>

@@ -1,7 +1,7 @@
 ﻿ <div id="contenu">
-    <h2>Liste des fiches de frais par Visiteur</h2>
-    <h3>Visiteur et Mois à sélectionner : </h3>
-    <form action="index.php?uc=validerFrais&action=voirLesFrais" method="post">
+    <h2>Suivre les frais</h2>
+    <h3>Veuillez sélectionner le Visiteur et le mois : </h3>
+    <form action="index.php?uc=suivreFrais&action=voirEtatFrais" method="post">
         <div class="corpsForm">
             <p>
                 <label for="lstVisiteur" accesskey="n">Visiteur : </label>

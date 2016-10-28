@@ -85,7 +85,6 @@ class PdoGsb{
 	}
 /**
  * Retourne le nombre de justificatif d'un visiteur pour un mois donné
- 
  * @param $idVisiteur 
  * @param $mois sous la forme aaaamm
  * @return le nombre entier de justificatifs 
@@ -99,7 +98,6 @@ class PdoGsb{
 /**
  * Retourne sous forme d'un tableau associatif toutes les lignes de frais au forfait
  * concernées par les deux arguments
- 
  * @param $idVisiteur 
  * @param $mois sous la forme aaaamm
  * @return l'id, le libelle et la quantité sous la forme d'un tableau associatif 
@@ -116,7 +114,6 @@ class PdoGsb{
 	}
 /**
  * Retourne tous les id de la table FraisForfait
- 
  * @return un tableau associatif 
 */
 	public function getLesIdFrais(){
@@ -127,10 +124,8 @@ class PdoGsb{
 	}
 /**
  * Met à jour la table ligneFraisForfait
- 
  * Met à jour la table ligneFraisForfait pour un visiteur et
  * un mois donné en enregistrant les nouveaux montants
- 
  * @param $idVisiteur 
  * @param $mois sous la forme aaaamm
  * @param $lesFrais tableau associatif de clé idFrais et de valeur la quantité pour ce frais
@@ -191,17 +186,17 @@ class PdoGsb{
 		return $dernierMois;
 	}	
 /**
- * Modifie l'état de la fiche en CL si celle-ci n'y est pas
- * Cette action se déclenche lors de la validation de la fiche par un comptable
+ * Modifie l'état de la fiche en l'état passé en paramètre
+ * Sauf si celui-ci est déja en place
  * 
  * @param type $idVisiteur
  * @param type $mois
  */
         
-        public function validationMois($idVisiteur, $mois){
+        public function validationMois($idVisiteur, $mois, $etat){
             $moisAvalider = $this->getLesInfosFicheFrais($idVisiteur, $mois);
-            if($moisAvalider['idEtat']=='CR'){
-                    $this->majEtatFicheFrais($idVisiteur, $mois,'CL');
+            if($moisAvalider['idEtat']!= $etat){
+                    $this->majEtatFicheFrais($idVisiteur, $mois, $etat);
 		}
             
         }
@@ -242,8 +237,7 @@ class PdoGsb{
 */
 	public function creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,$date,$montant){
 		$dateFr = dateFrancaisVersAnglais($date);
-		$req = "insert into lignefraishorsforfait 
-		values('','$idVisiteur','$mois','$libelle','$dateFr','$montant')";
+		$req = "insert into lignefraishorsforfait values(NULL,'$idVisiteur','$mois','$libelle','$dateFr','$montant')";
 		PdoGsb::$monPdo->exec($req);
 	}
 /**
@@ -271,7 +265,7 @@ class PdoGsb{
 /**
  * Ajout de la mentien REFUSE dans le libellé d'un frais non valide
  * Vérification si le mot REFUSE est déja présent, cela signifie que
- * le REFUS a déja été fait donc aucun update à faire.
+ * le REFUS a déja été fait donc aucun update à faire. Troncature de la chaine egalement
  * 
  * @param type $idFrais
  */       
@@ -281,7 +275,11 @@ class PdoGsb{
                 $resultat = $res->fetch();
                 $libelle = $resultat['libelle'];
                 if (!strstr($libelle,"REFUSE")){
-                    $req = "update lignefraishorsforfait set lignefraishorsforfait.libelle = 'REFUSE $libelle' where lignefraishorsforfait.id=$idFrais";
+                    $nouveauLibelle = "REFUSE $libelle";
+                    if (strlen($nouveauLibelle) >= 100){
+                        $nouveauLibelle = substr($nouveauLibelle, 0, 99);
+                    }
+                    $req = "update lignefraishorsforfait set lignefraishorsforfait.libelle = '$nouveauLibelle' where lignefraishorsforfait.id=$idFrais";
                     PdoGsb::$monPdo->exec($req);
                 }
         }
@@ -290,9 +288,7 @@ class PdoGsb{
  * se trouvant dans la base.
  * 
  * @return lesMois
- * 
- *  
- */
+  */
         public function getListeMois(){
             $req = "select distinct fichefrais.mois as mois from fichefrais order by fichefrais.mois desc limit 12";
             $res = PdoGsb::$monPdo->query($req);
@@ -352,6 +348,7 @@ class PdoGsb{
 	public function majEtatFicheFrais($idVisiteur,$mois,$etat){
 		$req = "update ficheFrais set idEtat = '$etat', dateModif = now() 
 		where fichefrais.idvisiteur ='$idVisiteur' and fichefrais.mois = '$mois'";
+                var_dump($req);
 		PdoGsb::$monPdo->exec($req);
 	}
         
@@ -367,15 +364,15 @@ class PdoGsb{
         }
 
 /**
- * Cherche dans la base les fiches ayant l'état à Valider et les retourne dans un tableau
+ * Cherche dans la base les fiches ayant l'état à Valider et les retourne pour un visiteur et un moi donné
  * 
- * @return $lesFiches
+ * @return $laFiche
  */        
-        public function getFicheAValider(){
-                $req = "select visiteur.nom as nom, visiteur.prenom as prenom, fichefrais.idvisiteur as idvisiteur, fichefrais.mois as mois from visiteur join fichefrais on visiteur.id = fichefrais.idvisiteur where fichefrais.idetat = 'VA'";
+        public function getFicheAValider($idVisiteur, $mois){
+                $req = "select * from fichefrais where fichefrais.idetat = 'VA' and fichefrais.idvisiteur = '$idVisiteur' and fichefrais.mois = '$mois'";
                 $res = PdoGsb::$monPdo->query($req);
-                $lesFiches = $res->fetchAll();
-                return $lesFiches;
+                $laFiche = $res->fetch();
+                return $laFiche;
         }
 }
 ?>
