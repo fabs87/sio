@@ -288,7 +288,7 @@ class PdoGsb{
  * se trouvant dans la base.
  * 
  * @return lesMois
-  */
+ */
         public function getListeMois(){
             $req = "select distinct fichefrais.mois as mois from fichefrais order by fichefrais.mois desc limit 12";
             $res = PdoGsb::$monPdo->query($req);
@@ -302,7 +302,7 @@ class PdoGsb{
  
  * @param $idVisiteur 
  * @return un tableau associatif de clé un mois -aaaamm- et de valeurs l'année et le mois correspondant 
-*/
+ */
 	public function getLesMoisDisponibles($idVisiteur){
 		$req = "select fichefrais.mois as mois from  fichefrais where fichefrais.idvisiteur ='$idVisiteur' 
 		order by fichefrais.mois desc ";
@@ -328,7 +328,7 @@ class PdoGsb{
  * @param $idVisiteur 
  * @param $mois sous la forme aaaamm
  * @return un tableau avec des champs de jointure entre une fiche de frais et la ligne d'état 
-*/	
+ */	
 	public function getLesInfosFicheFrais($idVisiteur,$mois){
 		$req = "select ficheFrais.idEtat as idEtat, ficheFrais.dateModif as dateModif, ficheFrais.nbJustificatifs as nbJustificatifs, 
 			ficheFrais.montantValide as montantValide, etat.libelle as libEtat from  fichefrais inner join Etat on ficheFrais.idEtat = Etat.id 
@@ -348,13 +348,14 @@ class PdoGsb{
 	public function majEtatFicheFrais($idVisiteur,$mois,$etat){
 		$req = "update ficheFrais set idEtat = '$etat', dateModif = now() 
 		where fichefrais.idvisiteur ='$idVisiteur' and fichefrais.mois = '$mois'";
-                var_dump($req);
 		PdoGsb::$monPdo->exec($req);
 	}
         
 /**
 * Cherche dans la base la liste de tous les visiteurs qui ne sont pas 
 * comptable ( donc valeur du profil à 0) et le retourne dans un tableau
+*
+* @return $lesVisiteurs  
 */
         public function getListeVisiteur(){
                 $req = "select visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom from visiteur where visiteur.profil = 0";
@@ -364,7 +365,8 @@ class PdoGsb{
         }
 
 /**
- * Cherche dans la base les fiches ayant l'état à Valider et les retourne pour un visiteur et un moi donné
+ * Cherche dans la base les fiches ayant l'état à Valider et les retourne pour 
+ * un visiteur et un mois donné
  * 
  * @return $laFiche
  */        
@@ -373,6 +375,29 @@ class PdoGsb{
                 $res = PdoGsb::$monPdo->query($req);
                 $laFiche = $res->fetch();
                 return $laFiche;
+        }
+        
+/**
+ * Comptablise le montant des frais hors forfait uniquement s'il n'y a pas de 
+ * libelle REFUSE dans l'intitulé
+ * 
+ * @param  $idVisiteur
+ * @param  $mois
+ * @return float $montant
+ */
+        public function comptabiliserLesFraisHorsForfait($idVisiteur, $mois){
+            $montant = 0;
+            $req = "select fichefraishorsforfait.libelle as libelle, fichefraishorsforfait.montant as montant from fichefraishorsforfait where fichefraishorsforfait.idVisiteur = $idVisiteur and fichefraishorsforfait.mois = $mois";
+            $res = PdoGsb::$monPdo->query($req);
+            $lesFraisHorsForfait = $res->fetchAll();
+            
+            //Vérification du libelle et ajout du montant s'il n'est pas refusé
+            foreach ($lesFraisHorsForfait as $unFraisHorsForfait){
+                if (!strstr($unFraisHorsForfait['libelle'], "REFUSE")){
+                    $montant += $unFraisHorsForfait['montant'];
+                }
+            }
+            return $montant;
         }
 }
 ?>
