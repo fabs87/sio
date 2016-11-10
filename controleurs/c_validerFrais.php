@@ -6,10 +6,13 @@ switch ($action) {
     case 'selectionMoisVisiteur': {
             $lesVisiteurs = $pdo->getListeVisiteur();
             $lesMois = $pdo->getListeMois();
-            include("vues/v_listeFraisVisiteurParMois.php");
+            include("vues/v_listeMoisEtVisiteur.php");
             break;
         }
     case 'voirLesFrais': {
+            $lesVisiteurs = $pdo->getListeVisiteur();
+            $lesMois = $pdo->getListeMois();
+            include("vues/v_listeMoisEtVisiteur.php");
             $visiteur = $_REQUEST['lstVisiteur'];
             $leMois = $_REQUEST['lstMois'];
             $_SESSION['leMois'] = $leMois;
@@ -31,6 +34,9 @@ switch ($action) {
             break;
         }
     case 'validerMajFraisForfait': {
+            $lesVisiteurs = $pdo->getListeVisiteur();
+            $lesMois = $pdo->getListeMois();
+            include("vues/v_listeMoisEtVisiteur.php");
             $lesFrais = $_REQUEST['lesFrais'];
             $visiteur = $_SESSION['leVisiteur'];
             $leMois = $_SESSION['leMois'];
@@ -50,6 +56,9 @@ switch ($action) {
             break;
         }
     case 'refuserFrais': {
+            $lesVisiteurs = $pdo->getListeVisiteur();
+            $lesMois = $pdo->getListeMois();
+            include("vues/v_listeMoisEtVisiteur.php");
             $idFrais = $_REQUEST['idFrais'];
             $visiteur = $_SESSION['leVisiteur'];
             $leMois = $_SESSION['leMois'];
@@ -64,6 +73,9 @@ switch ($action) {
             break;
         }
     case 'reporterFrais': {
+            $lesVisiteurs = $pdo->getListeVisiteur();
+            $lesMois = $pdo->getListeMois();
+            include("vues/v_listeMoisEtVisiteur.php");
             $idFrais = $_REQUEST['idFrais'];
             $visiteur = $_SESSION['leVisiteur'];
             $leMoisSelectionne = $_SESSION['leMois'];
@@ -95,10 +107,13 @@ switch ($action) {
             break;
         }
     case 'validationFrais':{
+            $lesVisiteurs = $pdo->getListeVisiteur();
+            $lesMois = $pdo->getListeMois();
+            include("vues/v_listeMoisEtVisiteur.php");
             $visiteur = $_SESSION['leVisiteur'];
             $mois = $_REQUEST['mois'];
             $etat = "CL";
-            $pdo->validationMois($visiteur,$mois, $etat);
+            $pdo->majEtatFicheFrais($visiteur,$mois, $etat);
             break;
     }   
 

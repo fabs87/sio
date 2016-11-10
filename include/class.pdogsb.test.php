@@ -18,9 +18,9 @@
 class PdoGsb {
 
     private static $serveur = 'mysql:host=localhost';
-    private static $bdd = 'dbname=gsb_frais';
-    private static $user = 'root';
-    private static $mdp = '';
+    private static $bdd = 'dbname=gsbunit';
+    private static $user = 'unit';
+    private static $mdp = 'unit';
     private static $monPdo;
     private static $monPdoGsb = null;
 
@@ -28,7 +28,7 @@ class PdoGsb {
      * Constructeur privé, crée l'instance de PDO qui sera sollicitée
      * pour toutes les méthodes de la classe
      */
-    private function __construct() {
+    public function __construct() {
         PdoGsb::$monPdo = new PDO(PdoGsb::$serveur . ';' . PdoGsb::$bdd, PdoGsb::$user, PdoGsb::$mdp);
         PdoGsb::$monPdo->query("SET CHARACTER SET utf8");
     }

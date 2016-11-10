@@ -25,7 +25,6 @@ switch ($action) {
         }
     case 'validerCreationFrais': {
             $dateFrais = $_REQUEST['dateFrais'];
-            var_dump($dateFrais);
             $libelle = $_REQUEST['libelle'];
             $montant = $_REQUEST['montant'];
             valideInfosFrais($dateFrais, $libelle, $montant);

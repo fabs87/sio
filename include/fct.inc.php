@@ -238,4 +238,10 @@ function nbErreurs(){
 	}
 }
 
+function filtrerChainePourBD($chaine){
+    if (!get_magic_quotes_gpc()){
+        $chaineValide = addslashes($chaine);
+    }
+    return $chaineValide;
+}
 ?>

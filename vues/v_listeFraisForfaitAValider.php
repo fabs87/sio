@@ -1,6 +1,5 @@
-<div id="contenu">
     <h2>Frais a valider <?php echo $numMois . "-" . $numAnnee ?></h2>
-
+   
     <form method="post" action="index.php?uc=validerFrais&action=validerMajFraisForfait">
         
             <fieldset>

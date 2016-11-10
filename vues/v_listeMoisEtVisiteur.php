@@ -1,6 +1,5 @@
 ﻿ <div id="contenu">
-    <h2>Liste des fiches de frais par Visiteur</h2>
-    <h3>Visiteur et Mois à sélectionner : </h3>
+    <h2>Choisir le Visiteur et le Mois : </h2>
     <form action="index.php?uc=validerFrais&action=voirLesFrais" method="post">
         <div class="corpsForm">
             <p>
