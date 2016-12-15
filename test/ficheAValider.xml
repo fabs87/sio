@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <table name ="fichefrais">
+        <column>idVisiteur</column>
+        <column>mois</column>
+        <column>nbJustificatifs</column>
+        <column>montantValide</column>
+        <column>dateModif</column>
+        <column>idEtat</column>
+        <row>
+            <value>a131</value>
+            <value>201609</value>           
+            <value>8</value>            
+            <value>3765.00</value>
+            <value>2016-10-02</value>
+            <value>VA</value>
+        </row>
+
+    </table>
+</dataset>
+
+ 

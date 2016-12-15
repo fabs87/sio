@@ -13,16 +13,13 @@ switch ($action) {
             $lesVisiteurs = $pdo->getListeVisiteur();
             $lesMois = $pdo->getListeMois();
             include("vues/v_listeMoisEtVisiteur.php");
-            $visiteur = $_REQUEST['lstVisiteur'];
+            $leVisiteur = $_REQUEST['lstVisiteur'];
             $leMois = $_REQUEST['lstMois'];
-            $_SESSION['leMois'] = $leMois;
-            $numAnnee = substr($leMois, 0, 4);
-            $_SESSION['numAnnee'] = $numAnnee;
-            $numMois = substr($leMois, 4, 2);
-            $_SESSION['numMois'] = $numMois;
-            $_SESSION['leVisiteur'] = $visiteur;
-            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($visiteur, $leMois);
-            $lesFraisForfait = $pdo->getLesFraisForfait($visiteur, $leMois);
+            memoriseLeVisiteur($leMois, $leVisiteur);
+            $numMois = $_SESSION['numMois'];
+            $numAnnee = $_SESSION['numAnnee'];
+            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($leVisiteur, $leMois);
+            $lesFraisForfait = $pdo->getLesFraisForfait($leVisiteur, $leMois);
             if (empty($lesFraisForfait) && empty($lesFraisHorsForfait)) {
                 ajouterErreur("Pas de fiche de Frais pour ce mois");
                 include("vues/v_erreurs.php");
@@ -38,14 +35,14 @@ switch ($action) {
             $lesMois = $pdo->getListeMois();
             include("vues/v_listeMoisEtVisiteur.php");
             $lesFrais = $_REQUEST['lesFrais'];
-            $visiteur = $_SESSION['leVisiteur'];
+            $leVisiteur = $_SESSION['leVisiteur'];
             $leMois = $_SESSION['leMois'];
             $numMois = $_SESSION['numMois'];
             $numAnnee = $_SESSION['numAnnee'];
             if (lesQteFraisValides($lesFrais)) {
-                $pdo->majFraisForfait($visiteur, $leMois, $lesFrais);
-                $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($visiteur, $leMois);
-                $lesFraisForfait = $pdo->getLesFraisForfait($visiteur, $leMois);
+                $pdo->majFraisForfait($leVisiteur, $leMois, $lesFrais);
+                $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($leVisiteur, $leMois);
+                $lesFraisForfait = $pdo->getLesFraisForfait($leVisiteur, $leMois);
                 include("vues/v_listeFraisForfaitAValider.php");
                 include("vues/v_listeFraisHorsForfaitAValider.php");
                 include("vues/v_validationFrais.php");
@@ -60,13 +57,13 @@ switch ($action) {
             $lesMois = $pdo->getListeMois();
             include("vues/v_listeMoisEtVisiteur.php");
             $idFrais = $_REQUEST['idFrais'];
-            $visiteur = $_SESSION['leVisiteur'];
+            $leVisiteur = $_SESSION['leVisiteur'];
             $leMois = $_SESSION['leMois'];
             $numMois = $_SESSION['numMois'];
             $numAnnee = $_SESSION['numAnnee'];
             $pdo->majLibelleRefuse($idFrais);
-            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($visiteur, $leMois);
-            $lesFraisForfait = $pdo->getLesFraisForfait($visiteur, $leMois);
+            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($leVisiteur, $leMois);
+            $lesFraisForfait = $pdo->getLesFraisForfait($leVisiteur, $leMois);
             include("vues/v_listeFraisForfaitAValider.php");
             include("vues/v_listeFraisHorsForfaitAValider.php");
             include("vues/v_validationFrais.php");
@@ -77,7 +74,7 @@ switch ($action) {
             $lesMois = $pdo->getListeMois();
             include("vues/v_listeMoisEtVisiteur.php");
             $idFrais = $_REQUEST['idFrais'];
-            $visiteur = $_SESSION['leVisiteur'];
+            $leVisiteur = $_SESSION['leVisiteur'];
             $leMoisSelectionne = $_SESSION['leMois'];
             $moisSuivant = getMoisSuivant($leMoisSelectionne);
             $numMois = $_SESSION['numMois'];
@@ -86,20 +83,20 @@ switch ($action) {
             $leLibelleConcerne = $leFrais['libelle'];
             $leMontantConcerne = $leFrais['montant'];
             $dateActuelle = date("d/m/Y");
-            if (!$pdo ->estPremierFraisMois($visiteur, $moisSuivant)){
-                $pdo->creeNouveauFraisHorsForfait($visiteur,$moisSuivant,$leLibelleConcerne,$dateActuelle,$leMontantConcerne);
+            if (!$pdo ->estPremierFraisMois($leVisiteur, $moisSuivant)){
+                $pdo->creeNouveauFraisHorsForfait($leVisiteur,$moisSuivant,$leLibelleConcerne,$dateActuelle,$leMontantConcerne);
                 $pdo->supprimerFraisHorsForfait($idFrais);
-                $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($visiteur, $leMoisSelectionne);
-                $lesFraisForfait = $pdo->getLesFraisForfait($visiteur, $leMoisSelectionne);
+                $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($leVisiteur, $leMoisSelectionne);
+                $lesFraisForfait = $pdo->getLesFraisForfait($leVisiteur, $leMoisSelectionne);
                 include("vues/v_listeFraisForfaitAValider.php");
                 include("vues/v_listeFraisHorsForfaitAValider.php");
                 include("vues/v_validationFrais.php");
             }else{
-                $pdo->creeNouvellesLignesFrais($visiteur,$moisSuivant);
-                $pdo->creeNouveauFraisHorsForfait($visiteur,$moisSuivant,$leLibelleConcerne,$dateActuelle,$leMontantConcerne);
+                $pdo->creeNouvellesLignesFrais($leVisiteur,$moisSuivant);
+                $pdo->creeNouveauFraisHorsForfait($leVisiteur,$moisSuivant,$leLibelleConcerne,$dateActuelle,$leMontantConcerne);
                 $pdo->supprimerFraisHorsForfait($idFrais);
-                $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($visiteur, $leMoisSelectionne);
-                $lesFraisForfait = $pdo->getLesFraisForfait($visiteur, $leMoisSelectionne);
+                $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($leVisiteur, $leMoisSelectionne);
+                $lesFraisForfait = $pdo->getLesFraisForfait($leVisiteur, $leMoisSelectionne);
                 include("vues/v_listeFraisForfaitAValider.php");
                 include("vues/v_listeFraisHorsForfaitAValider.php");
                 include("vues/v_validationFrais.php");
@@ -110,10 +107,10 @@ switch ($action) {
             $lesVisiteurs = $pdo->getListeVisiteur();
             $lesMois = $pdo->getListeMois();
             include("vues/v_listeMoisEtVisiteur.php");
-            $visiteur = $_SESSION['leVisiteur'];
+            $leVisiteur = $_SESSION['leVisiteur'];
             $mois = $_REQUEST['mois'];
             $etat = "CL";
-            $pdo->majEtatFicheFrais($visiteur,$mois, $etat);
+            $pdo->majEtatFicheFrais($leVisiteur,$mois, $etat);
             break;
     }   
 

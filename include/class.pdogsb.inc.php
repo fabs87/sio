@@ -1,15 +1,12 @@
-﻿<?php
-
+<?php
 /**
  * Classe d'accès aux données. 
-
  * Utilise les services de la classe PDO
  * pour l'application GSB
  * Les attributs sont tous statiques,
  * les 4 premiers pour la connexion
  * $monPdo de type PDO 
  * $monPdoGsb qui contiendra l'unique instance de la classe
-
  * @package default
  * @author Cheri Bibi
  * @version    1.0
@@ -83,8 +80,8 @@ class PdoGsb {
      * @return tous les champs des lignes de frais hors forfait sous la forme d'un tableau associatif 
      */
     public function getLesFraisHorsForfait($idVisiteur, $mois) {
-        $req = "select * from lignefraishorsforfait where lignefraishorsforfait.idvisiteur ='".filtrerChainePourBD($idVisiteur)."' 
-		and lignefraishorsforfait.mois = '".filtrerChainePourBD($mois)."'";
+        $req = "select * from lignefraishorsforfait where lignefraishorsforfait.idvisiteur ='$idVisiteur' 
+		and lignefraishorsforfait.mois = '$mois'";
         $res = PdoGsb::$monPdo->query($req);
         $lesLignes = $res->fetchAll();
         $nbLignes = count($lesLignes);
@@ -119,7 +116,7 @@ class PdoGsb {
         $req = "select fraisforfait.id as idfrais, fraisforfait.libelle as libelle, 
 		lignefraisforfait.quantite as quantite from lignefraisforfait inner join fraisforfait 
 		on fraisforfait.id = lignefraisforfait.idfraisforfait
-		where lignefraisforfait.idvisiteur ='".filtrerChainePourBD($idVisiteur)."' and lignefraisforfait.mois='".filtrerChainePourBD($mois)."' 
+		where lignefraisforfait.idvisiteur ='$idVisiteur' and lignefraisforfait.mois='$mois' 
 		order by lignefraisforfait.idfraisforfait";
         $res = PdoGsb::$monPdo->query($req);
         $lesLignes = $res->fetchAll();
@@ -232,7 +229,7 @@ class PdoGsb {
     /**
      * Crée un nouveau frais hors forfait pour un visiteur un mois donné
      * à partir des informations fournies en paramètre
-
+     * 
      * @param $idVisiteur 
      * @param $mois sous la forme aaaamm
      * @param $libelle : le libelle du frais
@@ -259,10 +256,38 @@ class PdoGsb {
         $leFraisHorsForfait = $res->fetch();
         return $leFraisHorsForfait;
     }
-
+    /**
+     * Fonction permettant de retourner le libelle, montant, quantite
+     * pour l'impression PDF
+     * 
+     * @param type $idVisiteur
+     * @param type $mois
+     * @return $lesFraisForfait
+     */
+    public function getLesFraisForfaitEtLibelle($idVisiteur, $mois){
+        $req = "select fraisforfait.libelle, fraisforfait.montant, lignefraisforfait.quantite from fraisforfait join lignefraisforfait on "
+        . "lignefraisforfait.idfraisforfait = fraisforfait.id where idVisiteur = '".$idVisiteur."' and mois = '".$mois."'";
+        $res = PdoGsb::$monPdo->query($req);
+        $lesFraisForfait = $res->fetchAll();
+        return $lesFraisForfait;
+    }
+    /**
+     *  Fonction permettant de retourner le nom du visiteur, le montant validé
+     * @param type $idVisiteur
+     * @param type $mois
+     * @$return $infosPdf
+     */
+    public function getLesInfosPdf($idVisiteur, $mois){
+        $req = "select fichefrais.montantvalide, visiteur.nom, visiteur.prenom, fichefrais.mois from "
+                . "fichefrais join visiteur on fichefrais.idvisiteur = visiteur.id "
+                . "where idVisiteur = '".$idVisiteur."' and mois = '".$mois."'";
+        $res = PdoGsb::$monPdo->query($req);
+        $infosPdf = $res->fetch();
+        return $infosPdf;
+    }
+    
     /**
      * Supprime le frais hors forfait dont l'id est passé en argument
-
      * @param $idFrais 
      */
     public function supprimerFraisHorsForfait($idFrais) {
@@ -309,7 +334,6 @@ class PdoGsb {
     /**
      *     
      * Retourne les mois pour lesquel un visiteur a une fiche de frais
-
      * @param $idVisiteur 
      * @return un tableau associatif de clé un mois -aaaamm- et de valeurs l'année et le mois correspondant 
      */
@@ -340,9 +364,7 @@ class PdoGsb {
      * @return un tableau avec des champs de jointure entre une fiche de frais et la ligne d'état 
      */
     public function getLesInfosFicheFrais($idVisiteur, $mois) {
-        $req = "select ficheFrais.idEtat as idEtat, ficheFrais.dateModif as dateModif, ficheFrais.nbJustificatifs as nbJustificatifs, 
-			ficheFrais.montantValide as montantValide, etat.libelle as libEtat from  fichefrais inner join Etat on ficheFrais.idEtat = Etat.id 
-			where fichefrais.idvisiteur ='".filtrerChainePourBD($idVisiteur)."' and fichefrais.mois = '".filtrerChainePourBD($mois)."'";
+        $req = "select fichefrais.idEtat as idEtat, fichefrais.dateModif as dateModif, fichefrais.nbJustificatifs as nbJustificatifs, fichefrais.montantValide as montantValide, etat.libelle as libEtat from  fichefrais join Etat on fichefrais.idEtat = Etat.id where fichefrais.idvisiteur='".$idVisiteur."' and fichefrais.mois='".$mois."'";
         $res = PdoGsb::$monPdo->query($req);
         $laLigne = $res->fetch();
         return $laLigne;
@@ -378,6 +400,8 @@ class PdoGsb {
      * Cherche dans la base les fiches ayant l'état à Valider et les retourne pour 
      * un visiteur et un mois donné
      * 
+     * @param $idVisiteur
+     * @param $mois
      * @return $laFiche
      */
     public function getFicheAValider($idVisiteur, $mois) {
@@ -411,10 +435,10 @@ class PdoGsb {
         }
         return $montant;
     }
-
+    
     /** 
      * Cryptage de l'ensemble des mots de passe de la base
-     * @param  $idVisiteur
+     * 
      */
     public function hashDesMotDePasse(){
         $req = "select visiteur.mdp as mdp, visiteur.id as id from visiteur";
@@ -430,19 +454,39 @@ class PdoGsb {
     
      /** 
      * Cryptage du mot de passe concernant un visiteur donnée
-     * 
+     * @param  $idVisiteur
      */
-    public function hashDuMotDePasse($id){
-        $req = "select visiteur.mdp as mdp, visiteur.id as id from visiteur WHERE visiteur.id = '$id'";
+    public function hashDuMotDePasse($idVisiteur){
+        $req = "select visiteur.mdp as mdp, visiteur.id as id from visiteur WHERE visiteur.id = '$idVisiteur'";
         $res = PdoGsb::$monPdo->query($req);
         $leMDP = $res->fetch();
         if (!empty($leMDP)){
             $motDePasseCrypte = password_hash($leMDP['mdp'], PASSWORD_DEFAULT);
-            $req1 ="update visiteur set visiteur.mdp='$motDePasseCrypte' where visiteur.id='$id'";
+            $req1 ="update visiteur set visiteur.mdp='$motDePasseCrypte' where visiteur.id='$idVisiteur'";
             PdoGsb::$monPdo->exec($req1);
         }else{
             echo "Utilisateur inexistant";
         }
+    }
+    
+    /*
+     * Methode permettant l'enregistrement d'un mois et d'un visiteur par 
+     * rapport à l'impression PDF afin de déterminer si une impression à déja 
+     * été faite.
+     * @param  $idVisiteur
+     * @param  $mois
+     * @return boolean TRUE OR FALSE
+     */
+    
+    public function pdfMemorisation ($idVisiteur, $mois){
+        $req = "insert into pdf values ('".$idVisiteur."','".$mois."')";
+        $res = PdoGsb::$monPdo->exec($req); 
+        if ($res === FALSE){
+            return FALSE;
+        }else{
+            return TRUE;
+        }
+        
     }
 }
 ?>

@@ -1,12 +1,6 @@
 <?xml version="1.0"?>
 <mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-<database name="gsb_frais">
-	<table_structure name="etat">
-		<field Field="id" Type="char(2)" Null="NO" Key="PRI" Extra="" Comment="" />
-		<field Field="libelle" Type="varchar(30)" Null="YES" Key="" Extra="" Comment="" />
-		<key Table="etat" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="4" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="etat" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="5" Avg_row_length="3276" Data_length="16384" Max_data_length="0" Index_length="0" Data_free="0" Create_time="2016-10-19 11:43:10" Update_time="2016-11-10 15:26:37" Collation="utf8_general_ci" Create_options="" Comment="" />
-	</table_structure>
+<database name="gsbunit">
 	<table_data name="etat">
 	<row>
 		<field name="id">CL</field>
@@ -29,18 +23,390 @@
 		<field name="libelle">Validée</field>
 	</row>
 	</table_data>
-	<table_structure name="fichefrais">
-		<field Field="idVisiteur" Type="char(4)" Null="NO" Key="PRI" Extra="" Comment="" />
-		<field Field="mois" Type="char(6)" Null="NO" Key="PRI" Extra="" Comment="" />
-		<field Field="nbJustificatifs" Type="int(11)" Null="YES" Key="" Extra="" Comment="" />
-		<field Field="montantValide" Type="decimal(10,2)" Null="YES" Key="" Extra="" Comment="" />
-		<field Field="dateModif" Type="date" Null="YES" Key="" Extra="" Comment="" />
-		<field Field="idEtat" Type="char(2)" Null="YES" Key="MUL" Default="CR" Extra="" Comment="" />
-		<key Table="fichefrais" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="idVisiteur" Collation="A" Cardinality="28" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<key Table="fichefrais" Non_unique="0" Key_name="PRIMARY" Seq_in_index="2" Column_name="mois" Collation="A" Cardinality="2189" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<key Table="fichefrais" Non_unique="1" Key_name="idEtat" Seq_in_index="1" Column_name="idEtat" Collation="A" Cardinality="4" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="fichefrais" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="2189" Avg_row_length="67" Data_length="147456" Max_data_length="0" Index_length="98304" Data_free="0" Create_time="2016-10-19 11:43:10" Update_time="2016-11-10 16:18:29" Collation="utf8_general_ci" Create_options="" Comment="" />
-	</table_structure>
+	<table_data name="fraisforfait">
+	<row>
+		<field name="id">ETP</field>
+		<field name="libelle">Forfait Etape</field>
+		<field name="montant">110.00</field>
+	</row>
+	<row>
+		<field name="id">KM</field>
+		<field name="libelle">Frais Kilométrique</field>
+		<field name="montant">0.62</field>
+	</row>
+	<row>
+		<field name="id">NUI</field>
+		<field name="libelle">Nuitée Hôtel</field>
+		<field name="montant">80.00</field>
+	</row>
+	<row>
+		<field name="id">REP</field>
+		<field name="libelle">Repas Restaurant</field>
+		<field name="montant">25.00</field>
+	</row>
+	</table_data>
+	<table_data name="visiteur">
+	<row>
+		<field name="id">a131</field>
+		<field name="nom">Villechalane</field>
+		<field name="prenom">Louis</field>
+		<field name="login">lvillachane</field>
+		<field name="mdp">$2y$10$pxGArpzNrmfnLbAs9sW/7uHQ7waXEckU4ooknVkUjEcKA9BKyRH8.</field>
+		<field name="adresse">8 rue des Charmes</field>
+		<field name="cp">46000</field>
+		<field name="ville">Cahors</field>
+		<field name="dateEmbauche">2005-12-21</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">a17</field>
+		<field name="nom">Andre</field>
+		<field name="prenom">David</field>
+		<field name="login">dandre</field>
+		<field name="mdp">$2y$10$crSWRtMabjL7cNhLzmch3.gjX53VTUBCU8uMHb9dYEybFF29TwIVi</field>
+		<field name="adresse">1 rue Petit</field>
+		<field name="cp">46200</field>
+		<field name="ville">Lalbenque</field>
+		<field name="dateEmbauche">1998-11-23</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">a55</field>
+		<field name="nom">Bedos</field>
+		<field name="prenom">Christian</field>
+		<field name="login">cbedos</field>
+		<field name="mdp">$2y$10$bnWNn48GEtYZr6LnHgjZluh4KZP6R8xCf5Xhgvad7zwWQgTCc/Pn2</field>
+		<field name="adresse">1 rue Peranud</field>
+		<field name="cp">46250</field>
+		<field name="ville">Montcuq</field>
+		<field name="dateEmbauche">1995-01-12</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">a93</field>
+		<field name="nom">Tusseau</field>
+		<field name="prenom">Louis</field>
+		<field name="login">ltusseau</field>
+		<field name="mdp">$2y$10$TbzsESotDZSZ/BviuanxQOULgoXKDe96N0X5mZlG53bIjD36ZE.ZK</field>
+		<field name="adresse">22 rue des Ternes</field>
+		<field name="cp">46123</field>
+		<field name="ville">Gramat</field>
+		<field name="dateEmbauche">2000-05-01</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">b13</field>
+		<field name="nom">Bentot</field>
+		<field name="prenom">Pascal</field>
+		<field name="login">pbentot</field>
+		<field name="mdp">$2y$10$bJkCYop/b4bu7D.w1mZil.kyGTOGp0d1kpQmlalpFnvVNAJnX/y8e</field>
+		<field name="adresse">11 allée des Cerises</field>
+		<field name="cp">46512</field>
+		<field name="ville">Bessines</field>
+		<field name="dateEmbauche">1992-07-09</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">b16</field>
+		<field name="nom">Bioret</field>
+		<field name="prenom">Luc</field>
+		<field name="login">lbioret</field>
+		<field name="mdp">$2y$10$BNKO0LSzidaiDD.1n.ATPeq2jojksY96CMoxZArkiuql9bWIcQFai</field>
+		<field name="adresse">1 Avenue gambetta</field>
+		<field name="cp">46000</field>
+		<field name="ville">Cahors</field>
+		<field name="dateEmbauche">1998-05-11</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">b19</field>
+		<field name="nom">Bunisset</field>
+		<field name="prenom">Francis</field>
+		<field name="login">fbunisset</field>
+		<field name="mdp">$2y$10$fRnkwLqbbcxoCR6lrb12CeyTjTUSFrUy6lUtt1m4ZUviDEHVJryLq</field>
+		<field name="adresse">10 rue des Perles</field>
+		<field name="cp">93100</field>
+		<field name="ville">Montreuil</field>
+		<field name="dateEmbauche">1987-10-21</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">b25</field>
+		<field name="nom">Bunisset</field>
+		<field name="prenom">Denise</field>
+		<field name="login">dbunisset</field>
+		<field name="mdp">$2y$10$ibEjOvjOj5xifgmXH4E7auANvHBLGuuoNbx85rXJG.pMSUWahCr9m</field>
+		<field name="adresse">23 rue Manin</field>
+		<field name="cp">75019</field>
+		<field name="ville">paris</field>
+		<field name="dateEmbauche">2010-12-05</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">b28</field>
+		<field name="nom">Cacheux</field>
+		<field name="prenom">Bernard</field>
+		<field name="login">bcacheux</field>
+		<field name="mdp">$2y$10$RrK1FbJy.GE2WMMU2MIvc.KUmFOhbQn8GNIcwke1k2LY9vF4Pl3Ou</field>
+		<field name="adresse">114 rue Blanche</field>
+		<field name="cp">75017</field>
+		<field name="ville">Paris</field>
+		<field name="dateEmbauche">2009-11-12</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">b34</field>
+		<field name="nom">Cadic</field>
+		<field name="prenom">Eric</field>
+		<field name="login">ecadic</field>
+		<field name="mdp">$2y$10$wS7FPYqgpu4uvhipFo/27uUHPFmzgbphMIzH6breM5.VUG8Q9bmGe</field>
+		<field name="adresse">123 avenue de la République</field>
+		<field name="cp">75011</field>
+		<field name="ville">Paris</field>
+		<field name="dateEmbauche">2008-09-23</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">b4</field>
+		<field name="nom">Charoze</field>
+		<field name="prenom">Catherine</field>
+		<field name="login">ccharoze</field>
+		<field name="mdp">$2y$10$v7KqHiug9XTJV9V73UkoMOqJLNPDGm7hPLf7U.BUatKE602aj97r.</field>
+		<field name="adresse">100 rue Petit</field>
+		<field name="cp">75019</field>
+		<field name="ville">Paris</field>
+		<field name="dateEmbauche">2005-11-12</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">b50</field>
+		<field name="nom">Clepkens</field>
+		<field name="prenom">Christophe</field>
+		<field name="login">cclepkens</field>
+		<field name="mdp">$2y$10$Esubv1p74y.RZEDADaHwjulFhe8B/Nu3uyzw7SBmifyvLpMkl3efG</field>
+		<field name="adresse">12 allée des Anges</field>
+		<field name="cp">93230</field>
+		<field name="ville">Romainville</field>
+		<field name="dateEmbauche">2003-08-11</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">b59</field>
+		<field name="nom">Cottin</field>
+		<field name="prenom">Vincenne</field>
+		<field name="login">vcottin</field>
+		<field name="mdp">$2y$10$uxm2s6by2FfyRSf9kwAEZOvkHOWimw4minlGmrqZ3TfD9/S.9TpsK</field>
+		<field name="adresse">36 rue Des Roches</field>
+		<field name="cp">93100</field>
+		<field name="ville">Monteuil</field>
+		<field name="dateEmbauche">2001-11-18</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">c14</field>
+		<field name="nom">Daburon</field>
+		<field name="prenom">François</field>
+		<field name="login">fdaburon</field>
+		<field name="mdp">$2y$10$GNLAW5bnbjoqrdolL7aHY.9NYlfwtXWPq..KIbDs6lP3TYJnOZp4y</field>
+		<field name="adresse">13 rue de Chanzy</field>
+		<field name="cp">94000</field>
+		<field name="ville">Créteil</field>
+		<field name="dateEmbauche">2002-02-11</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">c3</field>
+		<field name="nom">De</field>
+		<field name="prenom">Philippe</field>
+		<field name="login">pde</field>
+		<field name="mdp">$2y$10$lQa635XuliUJNJBDvDnXr.RzDSz9LGZ6zA3/19aCX21.6iDNyG5RW</field>
+		<field name="adresse">13 rue Barthes</field>
+		<field name="cp">94000</field>
+		<field name="ville">Créteil</field>
+		<field name="dateEmbauche">2010-12-14</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">c52</field>
+		<field name="nom">Roby</field>
+		<field name="prenom">fabien</field>
+		<field name="login">froby</field>
+		<field name="mdp">$2y$10$c/9v.BxAUI2IRIXoGlmFu.BhJzQlDZSa1tu3qIL8oX6mogizqW8KG</field>
+		<field name="adresse">60 rue Hoche</field>
+		<field name="cp">87100</field>
+		<field name="ville">Limoges</field>
+		<field name="dateEmbauche">1999-09-28</field>
+		<field name="profil">1</field>
+	</row>
+	<row>
+		<field name="id">c54</field>
+		<field name="nom">Debelle</field>
+		<field name="prenom">Michel</field>
+		<field name="login">mdebelle</field>
+		<field name="mdp">$2y$10$K3N9vHpZDWTsETbQm4Gto.esnqUWDjN4iARYLPqhKJSbyEsnUWsKC</field>
+		<field name="adresse">181 avenue Barbusse</field>
+		<field name="cp">93210</field>
+		<field name="ville">Rosny</field>
+		<field name="dateEmbauche">2006-11-23</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">d13</field>
+		<field name="nom">Debelle</field>
+		<field name="prenom">Jeanne</field>
+		<field name="login">jdebelle</field>
+		<field name="mdp">$2y$10$YmAGocHUGwYKEmP4MRsljepOKXlSgAh6Qwg/OPY7ngpSKGQek31GG</field>
+		<field name="adresse">134 allée des Joncs</field>
+		<field name="cp">44000</field>
+		<field name="ville">Nantes</field>
+		<field name="dateEmbauche">2000-05-11</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">d51</field>
+		<field name="nom">Debroise</field>
+		<field name="prenom">Michel</field>
+		<field name="login">mdebroise</field>
+		<field name="mdp">$2y$10$DN5wbL15eaYGu4B5ZuNdHOW./fmiqqIS84jxbbtXbCWWMsjAhEBVm</field>
+		<field name="adresse">2 Bld Jourdain</field>
+		<field name="cp">44000</field>
+		<field name="ville">Nantes</field>
+		<field name="dateEmbauche">2001-04-17</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">e22</field>
+		<field name="nom">Desmarquest</field>
+		<field name="prenom">Nathalie</field>
+		<field name="login">ndesmarquest</field>
+		<field name="mdp">$2y$10$rGq3jWNRGW7EGkUym1Nnf.GoTWZ4l1UmHbbiZUuk2/ZKrWgcUT6Y2</field>
+		<field name="adresse">14 Place d Arc</field>
+		<field name="cp">45000</field>
+		<field name="ville">Orléans</field>
+		<field name="dateEmbauche">2005-11-12</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">e24</field>
+		<field name="nom">Desnost</field>
+		<field name="prenom">Pierre</field>
+		<field name="login">pdesnost</field>
+		<field name="mdp">$2y$10$1/TonD0p8mfUag8M9OMbBuyF7YfYvp2uoEnJWbgCwl0F5t8.1QKCe</field>
+		<field name="adresse">16 avenue des Cèdres</field>
+		<field name="cp">23200</field>
+		<field name="ville">Guéret</field>
+		<field name="dateEmbauche">2001-02-05</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">e39</field>
+		<field name="nom">Dudouit</field>
+		<field name="prenom">Frédéric</field>
+		<field name="login">fdudouit</field>
+		<field name="mdp">$2y$10$QuO05XOGh7JCsbUYrlRyO.ilo6Xu79ktvz9iKSizQMnp1DjzzKa3a</field>
+		<field name="adresse">18 rue de l église</field>
+		<field name="cp">23120</field>
+		<field name="ville">GrandBourg</field>
+		<field name="dateEmbauche">2000-08-01</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">e49</field>
+		<field name="nom">Duncombe</field>
+		<field name="prenom">Claude</field>
+		<field name="login">cduncombe</field>
+		<field name="mdp">$2y$10$fFxhbuqHXUZKYsD3upQQLOm0frhccRBwshg6TlmkX50IIIF7SuPde</field>
+		<field name="adresse">19 rue de la tour</field>
+		<field name="cp">23100</field>
+		<field name="ville">La souteraine</field>
+		<field name="dateEmbauche">1987-10-10</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">e5</field>
+		<field name="nom">Enault-Pascreau</field>
+		<field name="prenom">Céline</field>
+		<field name="login">cenault</field>
+		<field name="mdp">$2y$10$4teNltqua29zj4yePnOfM.TNjJLp5DudNusczt6745tz.t9rfTcX.</field>
+		<field name="adresse">25 place de la gare</field>
+		<field name="cp">23200</field>
+		<field name="ville">Gueret</field>
+		<field name="dateEmbauche">1995-09-01</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">e52</field>
+		<field name="nom">Eynde</field>
+		<field name="prenom">Valérie</field>
+		<field name="login">veynde</field>
+		<field name="mdp">$2y$10$juQhQu.wAvy3jUSVxd7GC.ENZH3K3uaEUcziDz922OEMLcw.lk9iW</field>
+		<field name="adresse">3 Grand Place</field>
+		<field name="cp">13015</field>
+		<field name="ville">Marseille</field>
+		<field name="dateEmbauche">1999-11-01</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">f1</field>
+		<field name="nom">f</field>
+		<field name="prenom">f</field>
+		<field name="login">f</field>
+		<field name="mdp">$2y$10$bJtYeTDBtT5cuLwPteFgWeWQOOXu7jsXtcpPI6H5KK9eKzn/b93HC</field>
+		<field name="adresse" xsi:nil="true" />
+		<field name="cp" xsi:nil="true" />
+		<field name="ville" xsi:nil="true" />
+		<field name="dateEmbauche" xsi:nil="true" />
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">f21</field>
+		<field name="nom">Finck</field>
+		<field name="prenom">Jacques</field>
+		<field name="login">jfinck</field>
+		<field name="mdp">$2y$10$tqJR5aJ4fBVb7a7e0BO3nudWDODfkMBkLq6783y55ejfqp94yMr8W</field>
+		<field name="adresse">10 avenue du Prado</field>
+		<field name="cp">13002</field>
+		<field name="ville">Marseille</field>
+		<field name="dateEmbauche">2001-11-10</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">f39</field>
+		<field name="nom">Frémont</field>
+		<field name="prenom">Fernande</field>
+		<field name="login">ffremont</field>
+		<field name="mdp">$2y$10$WpPfMdvDITAM1ivuhZzdRu4MSeSHK6rPPjZdQc8QmCDkqZW8fbC4i</field>
+		<field name="adresse">4 route de la mer</field>
+		<field name="cp">13012</field>
+		<field name="ville">Allauh</field>
+		<field name="dateEmbauche">1998-10-01</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">f4</field>
+		<field name="nom">Gest</field>
+		<field name="prenom">Alain</field>
+		<field name="login">agest</field>
+		<field name="mdp">$2y$10$2Q.WJRDf0ODbqZWACQTV8et/ozW0rDb/4jVxFneZPNZD0FSUkGD3W</field>
+		<field name="adresse">30 avenue de la mer</field>
+		<field name="cp">13025</field>
+		<field name="ville">Berre</field>
+		<field name="dateEmbauche">1985-11-01</field>
+		<field name="profil">0</field>
+	</row>
+	<row>
+		<field name="id">j001</field>
+		<field name="nom">do</field>
+		<field name="prenom">johnn</field>
+		<field name="login">jdo</field>
+		<field name="mdp">$2y$10$SozvHEUY7buwYKGPEe64CO5pR/CUI5OxulLJP3tErDChK/zQqAxS.</field>
+		<field name="adresse">inconnu</field>
+		<field name="cp">87000</field>
+		<field name="ville">inconnu</field>
+		<field name="dateEmbauche">2005-12-21</field>
+		<field name="profil">0</field>
+	</row>
+	</table_data>
 	<table_data name="fichefrais">
 	<row>
 		<field name="idVisiteur">a131</field>
@@ -17595,46 +17961,6 @@
 		<field name="idEtat">CL</field>
 	</row>
 	</table_data>
-	<table_structure name="fraisforfait">
-		<field Field="id" Type="char(3)" Null="NO" Key="PRI" Extra="" Comment="" />
-		<field Field="libelle" Type="char(20)" Null="YES" Key="" Extra="" Comment="" />
-		<field Field="montant" Type="decimal(5,2)" Null="YES" Key="" Extra="" Comment="" />
-		<key Table="fraisforfait" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="4" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="fraisforfait" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="4" Avg_row_length="4096" Data_length="16384" Max_data_length="0" Index_length="0" Data_free="0" Create_time="2016-10-19 11:43:10" Collation="utf8_general_ci" Create_options="" Comment="" />
-	</table_structure>
-	<table_data name="fraisforfait">
-	<row>
-		<field name="id">ETP</field>
-		<field name="libelle">Forfait Etape</field>
-		<field name="montant">110.00</field>
-	</row>
-	<row>
-		<field name="id">KM</field>
-		<field name="libelle">Frais Kilométrique</field>
-		<field name="montant">0.62</field>
-	</row>
-	<row>
-		<field name="id">NUI</field>
-		<field name="libelle">Nuitée Hôtel</field>
-		<field name="montant">80.00</field>
-	</row>
-	<row>
-		<field name="id">REP</field>
-		<field name="libelle">Repas Restaurant</field>
-		<field name="montant">25.00</field>
-	</row>
-	</table_data>
-	<table_structure name="lignefraisforfait">
-		<field Field="idVisiteur" Type="char(4)" Null="NO" Key="PRI" Extra="" Comment="" />
-		<field Field="mois" Type="char(6)" Null="NO" Key="PRI" Extra="" Comment="" />
-		<field Field="idFraisForfait" Type="char(3)" Null="NO" Key="PRI" Extra="" Comment="" />
-		<field Field="quantite" Type="int(11)" Null="YES" Key="" Extra="" Comment="" />
-		<key Table="lignefraisforfait" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="idVisiteur" Collation="A" Cardinality="28" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<key Table="lignefraisforfait" Non_unique="0" Key_name="PRIMARY" Seq_in_index="2" Column_name="mois" Collation="A" Cardinality="2189" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<key Table="lignefraisforfait" Non_unique="0" Key_name="PRIMARY" Seq_in_index="3" Column_name="idFraisForfait" Collation="A" Cardinality="8756" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<key Table="lignefraisforfait" Non_unique="1" Key_name="idFraisForfait" Seq_in_index="1" Column_name="idFraisForfait" Collation="A" Cardinality="4" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="lignefraisforfait" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="8756" Avg_row_length="46" Data_length="409600" Max_data_length="0" Index_length="262144" Data_free="0" Create_time="2016-10-19 11:43:10" Update_time="2016-11-10 15:13:38" Collation="utf8_general_ci" Create_options="" Comment="" />
-	</table_structure>
 	<table_data name="lignefraisforfait">
 	<row>
 		<field name="idVisiteur">a131</field>
@@ -70293,18 +70619,6 @@
 		<field name="quantite">2</field>
 	</row>
 	</table_data>
-	<table_structure name="lignefraishorsforfait">
-		<field Field="id" Type="int(11)" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
-		<field Field="idVisiteur" Type="char(4)" Null="NO" Key="MUL" Extra="" Comment="" />
-		<field Field="mois" Type="char(6)" Null="NO" Key="" Extra="" Comment="" />
-		<field Field="libelle" Type="varchar(100)" Null="YES" Key="" Extra="" Comment="" />
-		<field Field="date" Type="date" Null="YES" Key="" Extra="" Comment="" />
-		<field Field="montant" Type="decimal(10,2)" Null="YES" Key="" Extra="" Comment="" />
-		<key Table="lignefraishorsforfait" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="6961" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<key Table="lignefraishorsforfait" Non_unique="1" Key_name="idVisiteur" Seq_in_index="1" Column_name="idVisiteur" Collation="A" Cardinality="27" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<key Table="lignefraishorsforfait" Non_unique="1" Key_name="idVisiteur" Seq_in_index="2" Column_name="mois" Collation="A" Cardinality="2151" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="lignefraishorsforfait" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="6961" Avg_row_length="77" Data_length="540672" Max_data_length="0" Index_length="180224" Data_free="0" Auto_increment="6919" Create_time="2016-10-24 22:22:52" Update_time="2016-11-10 15:12:06" Collation="utf8_general_ci" Create_options="" Comment="" />
-	</table_structure>
 	<table_data name="lignefraishorsforfait">
 	<row>
 		<field name="id">1</field>
@@ -125529,382 +125843,6 @@
 		<field name="libelle">repas avec praticien</field>
 		<field name="date">2016-11-10</field>
 		<field name="montant">45.00</field>
-	</row>
-	</table_data>
-	<table_structure name="visiteur">
-		<field Field="id" Type="char(4)" Null="NO" Key="PRI" Extra="" Comment="" />
-		<field Field="nom" Type="char(30)" Null="YES" Key="" Extra="" Comment="" />
-		<field Field="prenom" Type="char(30)" Null="YES" Key="" Extra="" Comment="" />
-		<field Field="login" Type="char(20)" Null="YES" Key="" Extra="" Comment="" />
-		<field Field="mdp" Type="char(255)" Null="YES" Key="" Extra="" Comment="" />
-		<field Field="adresse" Type="char(30)" Null="YES" Key="" Extra="" Comment="" />
-		<field Field="cp" Type="char(5)" Null="YES" Key="" Extra="" Comment="" />
-		<field Field="ville" Type="char(30)" Null="YES" Key="" Extra="" Comment="" />
-		<field Field="dateEmbauche" Type="date" Null="YES" Key="" Extra="" Comment="" />
-		<field Field="profil" Type="int(1)" Null="NO" Key="" Default="0" Extra="" Comment="" />
-		<key Table="visiteur" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="29" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="visiteur" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="30" Avg_row_length="546" Data_length="16384" Max_data_length="0" Index_length="0" Data_free="0" Create_time="2016-10-19 11:43:10" Update_time="2016-11-10 18:01:41" Collation="utf8_general_ci" Create_options="" Comment="" />
-	</table_structure>
-	<table_data name="visiteur">
-	<row>
-		<field name="id">a131</field>
-		<field name="nom">Villechalane</field>
-		<field name="prenom">Louis</field>
-		<field name="login">lvillachane</field>
-		<field name="mdp">$2y$10$pxGArpzNrmfnLbAs9sW/7uHQ7waXEckU4ooknVkUjEcKA9BKyRH8.</field>
-		<field name="adresse">8 rue des Charmes</field>
-		<field name="cp">46000</field>
-		<field name="ville">Cahors</field>
-		<field name="dateEmbauche">2005-12-21</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">a17</field>
-		<field name="nom">Andre</field>
-		<field name="prenom">David</field>
-		<field name="login">dandre</field>
-		<field name="mdp">$2y$10$crSWRtMabjL7cNhLzmch3.gjX53VTUBCU8uMHb9dYEybFF29TwIVi</field>
-		<field name="adresse">1 rue Petit</field>
-		<field name="cp">46200</field>
-		<field name="ville">Lalbenque</field>
-		<field name="dateEmbauche">1998-11-23</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">a55</field>
-		<field name="nom">Bedos</field>
-		<field name="prenom">Christian</field>
-		<field name="login">cbedos</field>
-		<field name="mdp">$2y$10$bnWNn48GEtYZr6LnHgjZluh4KZP6R8xCf5Xhgvad7zwWQgTCc/Pn2</field>
-		<field name="adresse">1 rue Peranud</field>
-		<field name="cp">46250</field>
-		<field name="ville">Montcuq</field>
-		<field name="dateEmbauche">1995-01-12</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">a93</field>
-		<field name="nom">Tusseau</field>
-		<field name="prenom">Louis</field>
-		<field name="login">ltusseau</field>
-		<field name="mdp">$2y$10$TbzsESotDZSZ/BviuanxQOULgoXKDe96N0X5mZlG53bIjD36ZE.ZK</field>
-		<field name="adresse">22 rue des Ternes</field>
-		<field name="cp">46123</field>
-		<field name="ville">Gramat</field>
-		<field name="dateEmbauche">2000-05-01</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">b13</field>
-		<field name="nom">Bentot</field>
-		<field name="prenom">Pascal</field>
-		<field name="login">pbentot</field>
-		<field name="mdp">$2y$10$bJkCYop/b4bu7D.w1mZil.kyGTOGp0d1kpQmlalpFnvVNAJnX/y8e</field>
-		<field name="adresse">11 allée des Cerises</field>
-		<field name="cp">46512</field>
-		<field name="ville">Bessines</field>
-		<field name="dateEmbauche">1992-07-09</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">b16</field>
-		<field name="nom">Bioret</field>
-		<field name="prenom">Luc</field>
-		<field name="login">lbioret</field>
-		<field name="mdp">$2y$10$BNKO0LSzidaiDD.1n.ATPeq2jojksY96CMoxZArkiuql9bWIcQFai</field>
-		<field name="adresse">1 Avenue gambetta</field>
-		<field name="cp">46000</field>
-		<field name="ville">Cahors</field>
-		<field name="dateEmbauche">1998-05-11</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">b19</field>
-		<field name="nom">Bunisset</field>
-		<field name="prenom">Francis</field>
-		<field name="login">fbunisset</field>
-		<field name="mdp">$2y$10$fRnkwLqbbcxoCR6lrb12CeyTjTUSFrUy6lUtt1m4ZUviDEHVJryLq</field>
-		<field name="adresse">10 rue des Perles</field>
-		<field name="cp">93100</field>
-		<field name="ville">Montreuil</field>
-		<field name="dateEmbauche">1987-10-21</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">b25</field>
-		<field name="nom">Bunisset</field>
-		<field name="prenom">Denise</field>
-		<field name="login">dbunisset</field>
-		<field name="mdp">$2y$10$ibEjOvjOj5xifgmXH4E7auANvHBLGuuoNbx85rXJG.pMSUWahCr9m</field>
-		<field name="adresse">23 rue Manin</field>
-		<field name="cp">75019</field>
-		<field name="ville">paris</field>
-		<field name="dateEmbauche">2010-12-05</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">b28</field>
-		<field name="nom">Cacheux</field>
-		<field name="prenom">Bernard</field>
-		<field name="login">bcacheux</field>
-		<field name="mdp">$2y$10$RrK1FbJy.GE2WMMU2MIvc.KUmFOhbQn8GNIcwke1k2LY9vF4Pl3Ou</field>
-		<field name="adresse">114 rue Blanche</field>
-		<field name="cp">75017</field>
-		<field name="ville">Paris</field>
-		<field name="dateEmbauche">2009-11-12</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">b34</field>
-		<field name="nom">Cadic</field>
-		<field name="prenom">Eric</field>
-		<field name="login">ecadic</field>
-		<field name="mdp">$2y$10$wS7FPYqgpu4uvhipFo/27uUHPFmzgbphMIzH6breM5.VUG8Q9bmGe</field>
-		<field name="adresse">123 avenue de la République</field>
-		<field name="cp">75011</field>
-		<field name="ville">Paris</field>
-		<field name="dateEmbauche">2008-09-23</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">b4</field>
-		<field name="nom">Charoze</field>
-		<field name="prenom">Catherine</field>
-		<field name="login">ccharoze</field>
-		<field name="mdp">$2y$10$v7KqHiug9XTJV9V73UkoMOqJLNPDGm7hPLf7U.BUatKE602aj97r.</field>
-		<field name="adresse">100 rue Petit</field>
-		<field name="cp">75019</field>
-		<field name="ville">Paris</field>
-		<field name="dateEmbauche">2005-11-12</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">b50</field>
-		<field name="nom">Clepkens</field>
-		<field name="prenom">Christophe</field>
-		<field name="login">cclepkens</field>
-		<field name="mdp">$2y$10$Esubv1p74y.RZEDADaHwjulFhe8B/Nu3uyzw7SBmifyvLpMkl3efG</field>
-		<field name="adresse">12 allée des Anges</field>
-		<field name="cp">93230</field>
-		<field name="ville">Romainville</field>
-		<field name="dateEmbauche">2003-08-11</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">b59</field>
-		<field name="nom">Cottin</field>
-		<field name="prenom">Vincenne</field>
-		<field name="login">vcottin</field>
-		<field name="mdp">$2y$10$uxm2s6by2FfyRSf9kwAEZOvkHOWimw4minlGmrqZ3TfD9/S.9TpsK</field>
-		<field name="adresse">36 rue Des Roches</field>
-		<field name="cp">93100</field>
-		<field name="ville">Monteuil</field>
-		<field name="dateEmbauche">2001-11-18</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">c14</field>
-		<field name="nom">Daburon</field>
-		<field name="prenom">François</field>
-		<field name="login">fdaburon</field>
-		<field name="mdp">$2y$10$GNLAW5bnbjoqrdolL7aHY.9NYlfwtXWPq..KIbDs6lP3TYJnOZp4y</field>
-		<field name="adresse">13 rue de Chanzy</field>
-		<field name="cp">94000</field>
-		<field name="ville">Créteil</field>
-		<field name="dateEmbauche">2002-02-11</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">c3</field>
-		<field name="nom">De</field>
-		<field name="prenom">Philippe</field>
-		<field name="login">pde</field>
-		<field name="mdp">$2y$10$lQa635XuliUJNJBDvDnXr.RzDSz9LGZ6zA3/19aCX21.6iDNyG5RW</field>
-		<field name="adresse">13 rue Barthes</field>
-		<field name="cp">94000</field>
-		<field name="ville">Créteil</field>
-		<field name="dateEmbauche">2010-12-14</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">c52</field>
-		<field name="nom">Roby</field>
-		<field name="prenom">fabien</field>
-		<field name="login">froby</field>
-		<field name="mdp">$2y$10$c/9v.BxAUI2IRIXoGlmFu.BhJzQlDZSa1tu3qIL8oX6mogizqW8KG</field>
-		<field name="adresse">60 rue Hoche</field>
-		<field name="cp">87100</field>
-		<field name="ville">Limoges</field>
-		<field name="dateEmbauche">1999-09-28</field>
-		<field name="profil">1</field>
-	</row>
-	<row>
-		<field name="id">c54</field>
-		<field name="nom">Debelle</field>
-		<field name="prenom">Michel</field>
-		<field name="login">mdebelle</field>
-		<field name="mdp">$2y$10$K3N9vHpZDWTsETbQm4Gto.esnqUWDjN4iARYLPqhKJSbyEsnUWsKC</field>
-		<field name="adresse">181 avenue Barbusse</field>
-		<field name="cp">93210</field>
-		<field name="ville">Rosny</field>
-		<field name="dateEmbauche">2006-11-23</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">d13</field>
-		<field name="nom">Debelle</field>
-		<field name="prenom">Jeanne</field>
-		<field name="login">jdebelle</field>
-		<field name="mdp">$2y$10$YmAGocHUGwYKEmP4MRsljepOKXlSgAh6Qwg/OPY7ngpSKGQek31GG</field>
-		<field name="adresse">134 allée des Joncs</field>
-		<field name="cp">44000</field>
-		<field name="ville">Nantes</field>
-		<field name="dateEmbauche">2000-05-11</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">d51</field>
-		<field name="nom">Debroise</field>
-		<field name="prenom">Michel</field>
-		<field name="login">mdebroise</field>
-		<field name="mdp">$2y$10$DN5wbL15eaYGu4B5ZuNdHOW./fmiqqIS84jxbbtXbCWWMsjAhEBVm</field>
-		<field name="adresse">2 Bld Jourdain</field>
-		<field name="cp">44000</field>
-		<field name="ville">Nantes</field>
-		<field name="dateEmbauche">2001-04-17</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">e22</field>
-		<field name="nom">Desmarquest</field>
-		<field name="prenom">Nathalie</field>
-		<field name="login">ndesmarquest</field>
-		<field name="mdp">$2y$10$rGq3jWNRGW7EGkUym1Nnf.GoTWZ4l1UmHbbiZUuk2/ZKrWgcUT6Y2</field>
-		<field name="adresse">14 Place d Arc</field>
-		<field name="cp">45000</field>
-		<field name="ville">Orléans</field>
-		<field name="dateEmbauche">2005-11-12</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">e24</field>
-		<field name="nom">Desnost</field>
-		<field name="prenom">Pierre</field>
-		<field name="login">pdesnost</field>
-		<field name="mdp">$2y$10$1/TonD0p8mfUag8M9OMbBuyF7YfYvp2uoEnJWbgCwl0F5t8.1QKCe</field>
-		<field name="adresse">16 avenue des Cèdres</field>
-		<field name="cp">23200</field>
-		<field name="ville">Guéret</field>
-		<field name="dateEmbauche">2001-02-05</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">e39</field>
-		<field name="nom">Dudouit</field>
-		<field name="prenom">Frédéric</field>
-		<field name="login">fdudouit</field>
-		<field name="mdp">$2y$10$QuO05XOGh7JCsbUYrlRyO.ilo6Xu79ktvz9iKSizQMnp1DjzzKa3a</field>
-		<field name="adresse">18 rue de l église</field>
-		<field name="cp">23120</field>
-		<field name="ville">GrandBourg</field>
-		<field name="dateEmbauche">2000-08-01</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">e49</field>
-		<field name="nom">Duncombe</field>
-		<field name="prenom">Claude</field>
-		<field name="login">cduncombe</field>
-		<field name="mdp">$2y$10$fFxhbuqHXUZKYsD3upQQLOm0frhccRBwshg6TlmkX50IIIF7SuPde</field>
-		<field name="adresse">19 rue de la tour</field>
-		<field name="cp">23100</field>
-		<field name="ville">La souteraine</field>
-		<field name="dateEmbauche">1987-10-10</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">e5</field>
-		<field name="nom">Enault-Pascreau</field>
-		<field name="prenom">Céline</field>
-		<field name="login">cenault</field>
-		<field name="mdp">$2y$10$4teNltqua29zj4yePnOfM.TNjJLp5DudNusczt6745tz.t9rfTcX.</field>
-		<field name="adresse">25 place de la gare</field>
-		<field name="cp">23200</field>
-		<field name="ville">Gueret</field>
-		<field name="dateEmbauche">1995-09-01</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">e52</field>
-		<field name="nom">Eynde</field>
-		<field name="prenom">Valérie</field>
-		<field name="login">veynde</field>
-		<field name="mdp">$2y$10$juQhQu.wAvy3jUSVxd7GC.ENZH3K3uaEUcziDz922OEMLcw.lk9iW</field>
-		<field name="adresse">3 Grand Place</field>
-		<field name="cp">13015</field>
-		<field name="ville">Marseille</field>
-		<field name="dateEmbauche">1999-11-01</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">f1</field>
-		<field name="nom">f</field>
-		<field name="prenom">f</field>
-		<field name="login">f</field>
-		<field name="mdp">$2y$10$6PcooNHEuhhMzfF/9TafueZhfTuvCBbvWniI9zfMfuaH4cg/bpATW</field>
-		<field name="adresse" xsi:nil="true" />
-		<field name="cp" xsi:nil="true" />
-		<field name="ville" xsi:nil="true" />
-		<field name="dateEmbauche" xsi:nil="true" />
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">f21</field>
-		<field name="nom">Finck</field>
-		<field name="prenom">Jacques</field>
-		<field name="login">jfinck</field>
-		<field name="mdp">$2y$10$tqJR5aJ4fBVb7a7e0BO3nudWDODfkMBkLq6783y55ejfqp94yMr8W</field>
-		<field name="adresse">10 avenue du Prado</field>
-		<field name="cp">13002</field>
-		<field name="ville">Marseille</field>
-		<field name="dateEmbauche">2001-11-10</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">f39</field>
-		<field name="nom">Frémont</field>
-		<field name="prenom">Fernande</field>
-		<field name="login">ffremont</field>
-		<field name="mdp">$2y$10$WpPfMdvDITAM1ivuhZzdRu4MSeSHK6rPPjZdQc8QmCDkqZW8fbC4i</field>
-		<field name="adresse">4 route de la mer</field>
-		<field name="cp">13012</field>
-		<field name="ville">Allauh</field>
-		<field name="dateEmbauche">1998-10-01</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">f4</field>
-		<field name="nom">Gest</field>
-		<field name="prenom">Alain</field>
-		<field name="login">agest</field>
-		<field name="mdp">$2y$10$2Q.WJRDf0ODbqZWACQTV8et/ozW0rDb/4jVxFneZPNZD0FSUkGD3W</field>
-		<field name="adresse">30 avenue de la mer</field>
-		<field name="cp">13025</field>
-		<field name="ville">Berre</field>
-		<field name="dateEmbauche">1985-11-01</field>
-		<field name="profil">0</field>
-	</row>
-	<row>
-		<field name="id">j001</field>
-		<field name="nom">do</field>
-		<field name="prenom">johnn</field>
-		<field name="login">jdo</field>
-		<field name="mdp">$2y$10$SozvHEUY7buwYKGPEe64CO5pR/CUI5OxulLJP3tErDChK/zQqAxS.</field>
-		<field name="adresse">inconnu</field>
-		<field name="cp">87000</field>
-		<field name="ville">inconnu</field>
-		<field name="dateEmbauche">2005-12-21</field>
-		<field name="profil">0</field>
 	</row>
 	</table_data>
 </database>

@@ -1,0 +1,628 @@
+﻿<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database name="gsbtest">
+	<table_data name="etat">
+	<row>
+		<field name="id">CL</field>
+		<field name="libelle">Saisie clôturée</field>
+	</row>
+	<row>
+		<field name="id">CR</field>
+		<field name="libelle">Fiche créée, saisie en cours</field>
+	</row>
+	<row>
+		<field name="id">RB</field>
+		<field name="libelle">Remboursée</field>
+	</row>
+	<row>
+		<field name="id">VA</field>
+		<field name="libelle">Validée</field>
+	</row>
+        <row>
+		<field name="id">MP</field>
+		<field name="libelle">Mise en paiement</field>
+	</row>
+	</table_data>
+	<table_data name="visiteur">
+	<row>
+		<field name="id">a131</field>
+		<field name="nom">Villechalane</field>
+		<field name="prenom">Louis</field>
+		<field name="login">lvillachane</field>
+		<field name="mdp">jux7g</field>
+		<field name="adresse">8 rue des Charmes</field>
+		<field name="cp">46000</field>
+		<field name="ville">Cahors</field>
+		<field name="dateEmbauche">2005-12-21</field>
+	</row>
+	</table_data>
+	<table_data name="fichefrais">
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201601</field>
+		<field name="nbJustificatifs">9</field>
+		<field name="montantValide">3435.08</field>
+		<field name="dateModif">2016-03-08</field>
+		<field name="idEtat">RB</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201602</field>
+		<field name="nbJustificatifs">12</field>
+		<field name="montantValide">2620.14</field>
+		<field name="dateModif">2016-04-06</field>
+		<field name="idEtat">RB</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201603</field>
+		<field name="nbJustificatifs">6</field>
+		<field name="montantValide">3431.10</field>
+		<field name="dateModif">2016-05-02</field>
+		<field name="idEtat">RB</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201604</field>
+		<field name="nbJustificatifs">12</field>
+		<field name="montantValide">5282.22</field>
+		<field name="dateModif">2016-06-07</field>
+		<field name="idEtat">RB</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201605</field>
+		<field name="nbJustificatifs">8</field>
+		<field name="montantValide">4353.64</field>
+		<field name="dateModif">2016-07-06</field>
+		<field name="idEtat">RB</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201606</field>
+		<field name="nbJustificatifs">5</field>
+		<field name="montantValide">2596.19</field>
+		<field name="dateModif">2016-08-01</field>
+		<field name="idEtat">RB</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201607</field>
+		<field name="nbJustificatifs">2</field>
+		<field name="montantValide">4707.47</field>
+		<field name="dateModif">2016-09-04</field>
+		<field name="idEtat">RB</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201608</field>
+		<field name="nbJustificatifs">0</field>
+		<field name="montantValide">3468.53</field>
+		<field name="dateModif">2016-10-02</field>
+		<field name="idEtat">RB</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201609</field>
+		<field name="nbJustificatifs">8</field>
+		<field name="montantValide">3765.00</field>
+		<field name="dateModif">2016-10-02</field>
+		<field name="idEtat">VA</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201610</field>
+		<field name="nbJustificatifs">3</field>
+		<field name="montantValide">0.00</field>
+		<field name="dateModif">2016-10-07</field>
+		<field name="idEtat">CR</field>
+	</row>
+	</table_data>
+	<table_data name="fraisforfait">
+	<row>
+		<field name="id">ETP</field>
+		<field name="libelle">Forfait Etape</field>
+		<field name="montant">110.00</field>
+	</row>
+	<row>
+		<field name="id">KM</field>
+		<field name="libelle">Frais Kilométrique</field>
+		<field name="montant">0.62</field>
+	</row>
+	<row>
+		<field name="id">NUI</field>
+		<field name="libelle">Nuitée Hôtel</field>
+		<field name="montant">80.00</field>
+	</row>
+	<row>
+		<field name="id">REP</field>
+		<field name="libelle">Repas Restaurant</field>
+		<field name="montant">25.00</field>
+	</row>
+	</table_data>
+	<table_data name="lignefraisforfait">
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201601</field>
+		<field name="idFraisForfait">ETP</field>
+		<field name="quantite">2</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201601</field>
+		<field name="idFraisForfait">KM</field>
+		<field name="quantite">519</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201601</field>
+		<field name="idFraisForfait">NUI</field>
+		<field name="quantite">17</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201601</field>
+		<field name="idFraisForfait">REP</field>
+		<field name="quantite">16</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201602</field>
+		<field name="idFraisForfait">ETP</field>
+		<field name="quantite">9</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201602</field>
+		<field name="idFraisForfait">KM</field>
+		<field name="quantite">678</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201602</field>
+		<field name="idFraisForfait">NUI</field>
+		<field name="quantite">14</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201602</field>
+		<field name="idFraisForfait">REP</field>
+		<field name="quantite">8</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201603</field>
+		<field name="idFraisForfait">ETP</field>
+		<field name="quantite">15</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201603</field>
+		<field name="idFraisForfait">KM</field>
+		<field name="quantite">431</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201603</field>
+		<field name="idFraisForfait">NUI</field>
+		<field name="quantite">7</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201603</field>
+		<field name="idFraisForfait">REP</field>
+		<field name="quantite">2</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201604</field>
+		<field name="idFraisForfait">ETP</field>
+		<field name="quantite">20</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201604</field>
+		<field name="idFraisForfait">KM</field>
+		<field name="quantite">631</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201604</field>
+		<field name="idFraisForfait">NUI</field>
+		<field name="quantite">12</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201604</field>
+		<field name="idFraisForfait">REP</field>
+		<field name="quantite">15</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201605</field>
+		<field name="idFraisForfait">ETP</field>
+		<field name="quantite">18</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201605</field>
+		<field name="idFraisForfait">KM</field>
+		<field name="quantite">381</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201605</field>
+		<field name="idFraisForfait">NUI</field>
+		<field name="quantite">15</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201605</field>
+		<field name="idFraisForfait">REP</field>
+		<field name="quantite">20</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201606</field>
+		<field name="idFraisForfait">ETP</field>
+		<field name="quantite">10</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201606</field>
+		<field name="idFraisForfait">KM</field>
+		<field name="quantite">535</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201606</field>
+		<field name="idFraisForfait">NUI</field>
+		<field name="quantite">15</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201606</field>
+		<field name="idFraisForfait">REP</field>
+		<field name="quantite">15</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201607</field>
+		<field name="idFraisForfait">ETP</field>
+		<field name="quantite">8</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201607</field>
+		<field name="idFraisForfait">KM</field>
+		<field name="quantite">896</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201607</field>
+		<field name="idFraisForfait">NUI</field>
+		<field name="quantite">18</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201607</field>
+		<field name="idFraisForfait">REP</field>
+		<field name="quantite">10</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201608</field>
+		<field name="idFraisForfait">ETP</field>
+		<field name="quantite">13</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201608</field>
+		<field name="idFraisForfait">KM</field>
+		<field name="quantite">916</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201608</field>
+		<field name="idFraisForfait">NUI</field>
+		<field name="quantite">2</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201608</field>
+		<field name="idFraisForfait">REP</field>
+		<field name="quantite">3</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201609</field>
+		<field name="idFraisForfait">ETP</field>
+		<field name="quantite">17</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201609</field>
+		<field name="idFraisForfait">KM</field>
+		<field name="quantite">397</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201609</field>
+		<field name="idFraisForfait">NUI</field>
+		<field name="quantite">11</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201609</field>
+		<field name="idFraisForfait">REP</field>
+		<field name="quantite">4</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201610</field>
+		<field name="idFraisForfait">ETP</field>
+		<field name="quantite">4</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201610</field>
+		<field name="idFraisForfait">KM</field>
+		<field name="quantite">896</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201610</field>
+		<field name="idFraisForfait">NUI</field>
+		<field name="quantite">4</field>
+	</row>
+	<row>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201610</field>
+		<field name="idFraisForfait">REP</field>
+		<field name="quantite">12</field>
+	</row>
+	</table_data>
+	<table_data name="lignefraishorsforfait">
+	<row>
+		<field name="id">237</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201601</field>
+		<field name="libelle">taxi</field>
+		<field name="date">2016-01-06</field>
+		<field name="montant">43.00</field>
+	</row>
+	<row>
+		<field name="id">238</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201601</field>
+		<field name="libelle">rémunération intervenant/spécialiste</field>
+		<field name="date">2016-01-23</field>
+		<field name="montant">1016.00</field>
+	</row>
+	<row>
+		<field name="id">239</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201601</field>
+		<field name="libelle">repas avec praticien</field>
+		<field name="date">2016-01-14</field>
+		<field name="montant">30.00</field>
+	</row>
+	<row>
+		<field name="id">240</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201601</field>
+		<field name="libelle">repas avec praticien</field>
+		<field name="date">2016-01-23</field>
+		<field name="montant">35.00</field>
+	</row>
+	<row>
+		<field name="id">241</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201601</field>
+		<field name="libelle">repas avec praticien</field>
+		<field name="date">2016-01-16</field>
+		<field name="montant">44.00</field>
+	</row>
+	<row>
+		<field name="id">242</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201602</field>
+		<field name="libelle">Voyage SNCF</field>
+		<field name="date">2016-02-14</field>
+		<field name="montant">41.00</field>
+	</row>
+	<row>
+		<field name="id">243</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201602</field>
+		<field name="libelle">repas avec praticien</field>
+		<field name="date">2016-02-15</field>
+		<field name="montant">46.00</field>
+	</row>
+	<row>
+		<field name="id">244</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201603</field>
+		<field name="libelle">location salle conférence</field>
+		<field name="date">2016-03-20</field>
+		<field name="montant">405.00</field>
+	</row>
+	<row>
+		<field name="id">245</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201603</field>
+		<field name="libelle">achat de matériel de papèterie</field>
+		<field name="date">2016-03-25</field>
+		<field name="montant">33.00</field>
+	</row>
+	<row>
+		<field name="id">246</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201603</field>
+		<field name="libelle">location équipement vidéo/sonore</field>
+		<field name="date">2016-03-19</field>
+		<field name="montant">166.00</field>
+	</row>
+	<row>
+		<field name="id">247</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201603</field>
+		<field name="libelle">repas avec praticien</field>
+		<field name="date">2016-03-08</field>
+		<field name="montant">32.00</field>
+	</row>
+	<row>
+		<field name="id">248</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201603</field>
+		<field name="libelle">location véhicule</field>
+		<field name="date">2016-03-20</field>
+		<field name="montant">374.00</field>
+	</row>
+	<row>
+		<field name="id">249</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201604</field>
+		<field name="libelle">location véhicule</field>
+		<field name="date">2016-04-07</field>
+		<field name="montant">166.00</field>
+	</row>
+	<row>
+		<field name="id">250</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201604</field>
+		<field name="libelle">rémunération intervenant/spécialiste</field>
+		<field name="date">2016-04-17</field>
+		<field name="montant">1160.00</field>
+	</row>
+	<row>
+		<field name="id">251</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201604</field>
+		<field name="libelle">repas avec praticien</field>
+		<field name="date">2016-04-21</field>
+		<field name="montant">30.00</field>
+	</row>
+	<row>
+		<field name="id">252</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201605</field>
+		<field name="libelle">location équipement vidéo/sonore</field>
+		<field name="date">2016-05-19</field>
+		<field name="montant">816.00</field>
+	</row>
+	<row>
+		<field name="id">253</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201606</field>
+		<field name="libelle">repas avec praticien</field>
+		<field name="date">2016-06-08</field>
+		<field name="montant">34.00</field>
+	</row>
+	<row>
+		<field name="id">254</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201606</field>
+		<field name="libelle">achat de matériel de papèterie</field>
+		<field name="date">2016-06-11</field>
+		<field name="montant">50.00</field>
+	</row>
+	<row>
+		<field name="id">255</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201607</field>
+		<field name="libelle">frais vestimentaire/représentation</field>
+		<field name="date">2016-07-04</field>
+		<field name="montant">357.00</field>
+	</row>
+	<row>
+		<field name="id">256</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201607</field>
+		<field name="libelle">location équipement vidéo/sonore</field>
+		<field name="date">2016-07-16</field>
+		<field name="montant">674.00</field>
+	</row>
+	<row>
+		<field name="id">257</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201607</field>
+		<field name="libelle">rémunération intervenant/spécialiste</field>
+		<field name="date">2016-07-15</field>
+		<field name="montant">1074.00</field>
+	</row>
+	<row>
+		<field name="id">258</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201608</field>
+		<field name="libelle">location équipement vidéo/sonore</field>
+		<field name="date">2016-08-18</field>
+		<field name="montant">817.00</field>
+	</row>
+	<row>
+		<field name="id">259</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201608</field>
+		<field name="libelle">location véhicule</field>
+		<field name="date">2016-08-28</field>
+		<field name="montant">347.00</field>
+	</row>
+	<row>
+		<field name="id">260</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201608</field>
+		<field name="libelle">location équipement vidéo/sonore</field>
+		<field name="date">2016-08-03</field>
+		<field name="montant">457.00</field>
+	</row>
+	<row>
+		<field name="id">261</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201609</field>
+		<field name="libelle">frais vestimentaire/représentation</field>
+		<field name="date">2016-09-18</field>
+		<field name="montant">264.00</field>
+	</row>
+	<row>
+		<field name="id">262</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201609</field>
+		<field name="libelle">taxi</field>
+		<field name="date">2016-09-23</field>
+		<field name="montant">65.00</field>
+	</row>
+	<row>
+		<field name="id">263</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201609</field>
+		<field name="libelle">rémunération intervenant/spécialiste</field>
+		<field name="date">2016-09-10</field>
+		<field name="montant">1057.00</field>
+	</row>
+	<row>
+		<field name="id">264</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201610</field>
+		<field name="libelle">repas avec praticien</field>
+		<field name="date">2016-10-08</field>
+		<field name="montant">36.00</field>
+	</row>
+	<row>
+		<field name="id">265</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201610</field>
+		<field name="libelle">taxi</field>
+		<field name="date">2016-10-01</field>
+		<field name="montant">32.00</field>
+	</row>
+	<row>
+		<field name="id">266</field>
+		<field name="idVisiteur">a131</field>
+		<field name="mois">201610</field>
+		<field name="libelle">rémunération intervenant/spécialiste</field>
+		<field name="date">2016-10-25</field>
+		<field name="montant">531.00</field>
+	</row>
+	</table_data>
+</database>
+</mysqldump>

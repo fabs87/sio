@@ -1,4 +1,3 @@
-﻿
 <h3>Fiche de frais du mois <?php echo $numMois."-".$numAnnee?> : 
     </h3>
     <div class="encadre">
@@ -56,6 +55,8 @@
           }
 		?>
     </table>
+    <href><a href="include/pdf.php?id=<?php echo $idVisiteur?>&mois=<?php echo $leMois?>"  target="_blank">Telecharger PDF</a>
+    
   </div>
   </div>
  

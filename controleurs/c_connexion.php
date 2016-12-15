@@ -31,6 +31,9 @@ switch ($action) {
             }
             break;
         }
+        case 'valideConnexion': {
+                deconnecter();
+        }break;
     default : {
             include("vues/v_connexion.php");
             break;
